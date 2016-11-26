@@ -2,12 +2,13 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {  
+  devtool: "source-map",
   entry: {
     index: [ "./src/index.js", "./src/index.scss" ],
   },
   output: {
     path: __dirname + "/public",
-    filename: "index.[name]",
+    filename: "[name].js",
   },
   resolve: {
     extensions: [ '', '.js', '.scss' ],
