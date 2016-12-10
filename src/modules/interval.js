@@ -10,13 +10,14 @@ export default function(fps, cb) {
   const start = Now();
   let last = start;
 
-  setInterval(() => {
+  const interval = setInterval(() => {
     const now = Now();
 
     try {
-      cb({ type: "interval", t: start - now, dt: now - last });
+      cb({ type: "interval", t: now - start, dt: now - last });
     } catch (e) {
-      cb(e);
+      clearInterval(interval);
+      throw e;
     }
 
     last = now;

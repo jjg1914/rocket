@@ -13,6 +13,15 @@ export default class Collision {
     };
   }
 
+  static check(target, other) {
+    let mask1 = shapeFor(target);
+    let mask2 = shapeFor(other);
+
+    return _checkImpl(_hasNPhase(target) ? mask1 : null,
+                      _hasNPhase(other) ? mask2: null,
+                      mask1.bounds(), mask2.bounds());
+  }
+
   add(entity) {
     _add(entity, this._root, shapeFor(entity).bounds(), 0);
   }
@@ -23,7 +32,7 @@ export default class Collision {
     const rval = [];
 
     _query(dest, id, this._root,
-           bounds, fromBounds(bounds), false);
+           bounds, null, false);
 
     for (let e of dest) {
       if (e[1]) {
@@ -40,7 +49,7 @@ export default class Collision {
     const rval = [];
 
     _query(dest, entity.meta.id, this._root,
-           mask.bounds(), mask, _hasNPhase(entity));
+           mask.bounds(), _hasNPhase(entity) ? mask : null);
 
     for (let e of dest) {
       if (e[1]) {
@@ -70,21 +79,19 @@ function _add(entity, node, bounds, depth) {
   }
 }
 
-function _query(dest, id, node, bounds, mask, hasNPhase) {
+function _query(dest, id, node, bounds, mask) {
   if (node.children != null) {
     for (let e of node.children) {
       if (_checkBounds(bounds, e)) {
-        _query(dest, id, e, bounds, mask, hasNPhase);
+        _query(dest, id, e, bounds, mask);
       }
     }
   } else {
     for (let e of node.entities) {
-      if (id !== e[0].meta.id && !dest.has(e[0].meta.id)) {
-        let mtv = _checkBounds(bounds, e[1]);
-
-        if (mtv && (hasNPhase || _hasNPhase(e[0]))) {
-          mtv = _checkMasks(mask, shapeFor(e[0]));
-        }
+      if (e[0].meta.id != id && !dest.has(e[0].meta.id)) {
+        let mtv = _checkImpl(mask,
+                             _hasNPhase(e[0]) ? _shapeFor(e[0]) : null,
+                             bounds, e[1]);
 
         if (mtv)  {
           dest.set(e[0].meta.id, { entity: e[0], mtv: mtv });
@@ -122,6 +129,20 @@ function _rebalanceNode(node) {
   }
 }
 
+function _checkImpl(target, other, targetBounds, otherBounds) {
+  let mtv = _checkBounds(targetBounds, otherBounds);
+
+  if (mtv && target != null && other != null) {
+    mtv = _checkMasks(target, other);
+  }
+
+  if (mtv)  {
+    return mtv;
+  } else {
+    return false;
+  }
+}
+
 function _checkBounds(a, b) {
   if (a.left <= b.right && a.right >= b.left &&
       a.top <= b.bottom && a.bottom >= b.top) {
@@ -148,32 +169,6 @@ function _checkBounds(a, b) {
   } else {
     return false;
   }
-
-  if (a.left <= b.right && a.right >= b.left) {
-    const e = [ Math.max(a.left, b.left), Math.min(a.right, b.right) ];
-    const d = e[1] - e[0];
-
-    if (d < overlap) {
-      mtv = e;
-      overlap = d;
-    }
-  } else {
-    return false;
-  }
-
-  if (a.top <= b.bottom && a.bottom >= b.top) {
-    const e = [ Math.max(a.bottom, b.bottom), Math.min(a.top, b.top) ];
-    const d = e[1] - e[0];
-
-    if (d < overlap) {
-      mtv = e;
-      overlap = d;
-    }
-  } else {
-    return false;
-  }
-
-  return mtv;
 }
 
 function _checkMasks(a, b) {

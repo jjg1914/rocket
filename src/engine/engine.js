@@ -29,21 +29,27 @@ export default class Engine {
   }
 
   emit(event) {
-    this._events.push(event);
+    try {
+      this._events.push(event);
 
-    if (this._events.length === 1) {
-      while (this._events.length > 0) {
-        for (let state of this._states) {
-          if (state.send(this._events[this._events.length - 1], this)) {
-            break;
+      if (this._events.length === 1) {
+        while (this._events.length > 0) {
+
+          for (let state of this._states) {
+            if (state.send(this._events[0], this)) {
+              break;
+            }
           }
+
+          this._events.shift();
         }
-
-        this._events.pop();
       }
-    }
 
-    return this;
+      return this;
+    } catch (e) {
+      this._events.length = 0;
+      throw e;
+    }
   }
 
   push(state) {

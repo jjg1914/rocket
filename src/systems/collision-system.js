@@ -36,6 +36,12 @@ export default function CollisionSystem(engine) {
         mtv: xTarget.mtv,
         target: xTarget.entity,
       });
+
+      engine.emit({
+        type: "bump",
+        target: xTarget.entity,
+        mtv: xTarget.mtv,
+      });
     }
 
     if (yTarget != null) {
@@ -43,6 +49,12 @@ export default function CollisionSystem(engine) {
         entity: e,
         mtv: yTarget.mtv,
         target: yTarget.entity,
+      });
+
+      engine.emit({
+        type: "bump",
+        target: yTarget.entity,
+        mtv: yTarget.mtv,
       });
     }
   });
