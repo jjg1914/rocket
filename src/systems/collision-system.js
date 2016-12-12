@@ -1,7 +1,7 @@
 import Collision from "../util/collision";
 
-export default function CollisionSystem(engine) {
-  const collision = new Collision(192, 144);
+export default function CollisionSystem(engine, bounds) {
+  const collision = new Collision(bounds);
   const translations = [];
 
   engine.run([ "position" ], (e) => {

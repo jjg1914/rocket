@@ -12,14 +12,15 @@ export default function PlayerEntity(entity, x, y) {
       height: 16,
     }),
     movement: new MovementComponent({
-      gravity: 192,
+      restrict: true,
+      gravity: 224,
       friction: 128,
       xMax: 64,
       yMax: 192,
     }),
     control: new ControlComponent({
       xAccel: 192,
-      jumpSpeed: 128,
+      jumpSpeed: 192,
     }),
   });
 }

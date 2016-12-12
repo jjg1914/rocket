@@ -8,5 +8,6 @@ export default class MovementComponent {
     this.yMax = options.yMax != null ? options.yMax : null;
     this.gravity = options.gravity != null ? options.gravity : null;
     this.friction = options.friction != null ? options.friction : null;
+    this.restrict = options.restrict != null ? options.restrict : false;
   }
 }

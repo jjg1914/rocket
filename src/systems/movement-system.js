@@ -1,6 +1,7 @@
 import Path from "../util/path";
+import { shapeFor } from "../util/shape";
 
-export default function MovementSystem(event, engine) {
+export default function MovementSystem(event, engine, bounds) {
   const dt = event.dt / 1000;
 
   engine.run([ "position", "movement" ], (e) => {
@@ -15,6 +16,12 @@ export default function MovementSystem(event, engine) {
                                      e.movement.xAccel,
                                      e.movement.xMax,
                                      e.movement.friction);
+      if (e.movement.xAccel) {
+        let [ a, s ] = [ e.movement.xAccel, e.movement.xSpeed ];
+
+        e.movement.xSpeed = (a < 0 ? Math.min(s, 0) : Math.max(s, 0));
+      }
+
       e.movement.ySpeed = _accel(dt, e.movement.ySpeed,
                                      e.movement.yAccel + gravity,
                                      e.movement.yMax,
@@ -42,6 +49,24 @@ export default function MovementSystem(event, engine) {
 
       e.position.x = x;
       e.position.y = y;
+    }
+
+    if (e.movement.restrict) {
+      const b = shapeFor(e).bounds();
+      const w = b.right - b.left;
+      const h = b.bottom - b.top;
+      const oldX = e.position.x;
+      const oldY = e.position.y;
+
+      e.position.x = Math.min(Math.max(bounds.left, b.left), bounds.right - w);
+      if (e.position.x !== oldX) {
+        e.movement.xSpeed = 0;
+      }
+
+      e.position.y = Math.min(Math.max(bounds.top, b.top), bounds.bottom - h);
+      if (e.position.y !== oldY) {
+        e.movement.ySpeed = 0;
+      }
     }
   });
 }

@@ -2,12 +2,11 @@ import { shapeFor } from "../util/shape";
 
 export default function LandingSystem() {
   let bumps = [];
-  let prev = null;
 
   return (event, engine, target) => {
     switch (event.type) {
     case "interval":
-      engine.run(target, [ "position", "movement" ], (e) => {
+      engine.run(target, [ "control", "position", "movement" ], (e) => {
         let landing = null;
 
         if (bumps.length === 1) {
@@ -28,20 +27,20 @@ export default function LandingSystem() {
           }
         }
 
-        if (landing == null && prev != null) {
-          engine.run(prev, [ "position" ], (f) => {
+        if (landing == null) {
+          engine.run(e.control.landed, [ "position" ], (f) => {
             let b1 = shapeFor(e).bounds();
             let b2 = shapeFor(f).bounds();
 
             if (e.movement.ySpeed > 0 &&
                 b1.left <= b2.right && b1.right >= b2.left) {
-              landing = prev;
+              landing = f;
             }
           });
         }
 
         bumps.length = 0;
-        prev = landing;
+        e.control.landed = landing;
 
         engine.run(landing, [ "position", "movement" ], (f) => {
           const dt = event.dt / 1000;

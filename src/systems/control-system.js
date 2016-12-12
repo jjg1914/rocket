@@ -5,6 +5,7 @@ export default function ControlSystem(event, engine, target) {
 
   engine.run(target, [ "control", "movement" ], (e) => {
     let accel = 0;
+    let speed = 0;
 
     switch (event.which) {
     case Keys.ARROW_LEFT:
@@ -14,9 +15,13 @@ export default function ControlSystem(event, engine, target) {
       accel = e.control.xAccel;
       break;
     case Keys.ARROW_UP:
-      if (event.type === "keydown") {
+      if (event.type === "keydown" && e.control.landed != null) {
         e.movement.ySpeed = -e.control.jumpSpeed;
+        e.control.landed = null;
+      } else if (event.type === "keyup" && e.movement.ySpeed < 0) {
+        e.movement.ySpeed = 0;
       }
+
       return;
     }
 

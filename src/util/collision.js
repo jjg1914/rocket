@@ -3,14 +3,18 @@ import { Polygon, Circle, shapeFor, fromBounds } from "../util/shape";
 const DEPTH_LIMIT = 8;
 
 export default class Collision {
-  constructor(width, height) {
+  constructor(bounds) {
     this._root = {
-      top: 0,
-      left: 0,
-      bottom: height,
-      right: width,
+      top: bounds.top,
+      left: bounds.left,
+      bottom: bounds.bottom,
+      right: bounds.right,
       entities: [],
     };
+  }
+
+  static checkBounds(target, bounds) {
+    return _checkBounds(shapeFor(target).bounds(), bounds);
   }
 
   static check(target, other) {
