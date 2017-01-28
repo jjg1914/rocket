@@ -1,6 +1,7 @@
 import PositionComponent from "../components/position-component";
 import MovementComponent from "../components/movement-component";
 import ControlComponent from "../components/control-component";
+import RenderComponent from "../components/render-component";
 import Entity from "../engine/entity";
 
 export default function PlayerEntity(entity, x, y) {
@@ -13,14 +14,16 @@ export default function PlayerEntity(entity, x, y) {
     }),
     movement: new MovementComponent({
       restrict: true,
-      gravity: 224,
-      friction: 128,
       xMax: 64,
       yMax: 192,
+      friction: 128,
     }),
     control: new ControlComponent({
       xAccel: 192,
-      jumpSpeed: 192,
+      jumpSpeed: 160,
+    }),
+    render: new RenderComponent({
+      fill: "#00FF00",
     }),
   });
 }

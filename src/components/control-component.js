@@ -3,6 +3,6 @@ export default class ControlComponent {
     this.xAccel = options.xAccel != null ? options.xAccel : 0;
     this.yAccel = options.yAccel != null ? options.yAccel : 0;
     this.jumpSpeed = options.jumpSpeed != null ? options.jumpSpeed : 0;
-    this.landed = options.landed != null ? options.landed : false;
+    this.grabed = options.grabed != null ? options.grabed : null;
   }
 }

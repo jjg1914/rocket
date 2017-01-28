@@ -10,17 +10,28 @@ export default class Engine {
   }
 
   run(target, filters, f) {
-    if (target instanceof Array) {
+    if (arguments.length === 2) {
       f = filters;
       filters = target;
+      let funcs = _funcsFor(filters);
 
       for (let entity of this._entities) {
-        if (filters.every((e) => entity[1].hasOwnProperty(e))) {
+        if (_filter(entity[1], filters, funcs)) {
           f(entity[1]);
         }
       }
+    } else if (target instanceof Array) {
+      let funcs = _funcsFor(filters);
+
+      for (let entity of target) {
+        if (_filter(entity, filters, funcs)) {
+          f(entity);
+        }
+      }
     } else if (target != null) {
-      if (filters.every((e) => target.hasOwnProperty(e))) {
+      let funcs = _funcsFor(filters);
+
+      if (_filter(target, filters, funcs)) {
         f(target);
       }
     }
@@ -89,4 +100,36 @@ export default class Engine {
   destroy(entity) {
     this._entities.delete(entity.meta.id);
   }
+}
+
+function _filter(e, filters, funcs) {
+  for (let i = 0; i < filters.length; ++i) {
+    if (!funcs[i](filters[i], e)) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+function _funcsFor(filters) {
+  const rval = new Array(filters.length);
+
+  for (let i = 0; i < rval.length; ++i) {
+    if (filters[i][0] === "!") {
+      rval[i] = _filterNHasProperty;
+    } else {
+      rval[i] = _filterHasProperty;
+    }
+  }
+
+  return rval;
+}
+
+function _filterHasProperty(f, e) {
+  return e.hasOwnProperty(f);
+}
+
+function _filterNHasProperty(f, e) {
+  return !e.hasOwnProperty(f.substr(1));
 }

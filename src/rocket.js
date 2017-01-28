@@ -6,30 +6,36 @@ import RenderSystem from "./systems/render-system";
 import MovementSystem from "./systems/movement-system";
 import LandingSystem from "./systems/landing-system";
 import CollisionSystem from "./systems/collision-system";
+import GrabSystem from "./systems/grab-system";
+import JumpSystem from "./systems/jump-system";
 import ControlSystem from "./systems/control-system";
 import CameraSystem from "./systems/camera-system";
 
 import PositionComponent from "./components/position-component";
 import MovementComponent from "./components/movement-component";
 import PathComponent from "./components/path-component";
+import GrabComponent from "./components/grab-component";
+import RenderComponent from "./components/render-component";
 
 import Camera from "./util/camera";
 
 export default function() {
   return (new Engine()).push(new State((s) => {
-    let player = null;
-    let camera = null;
-    let bounds = {
-      left: 0,
-      top: 0,
-      right: 384,
-      bottom: 144,
-    };
-    let landing = LandingSystem();
-
     s.on("enter", (ev, engine) => {
-      camera = new Camera(192, 144);
-      player = PlayerEntity(engine.create(), 0, 112);
+      const player = PlayerEntity(engine.create(), 0, 112);
+      const camera = new Camera(192, 144);
+      const bounds = { left: 0, top: 0, right: 384, bottom: 144 };
+
+      MovementSystem(s, bounds, 208);
+      CollisionSystem(s, bounds);
+      LandingSystem(s);
+
+      GrabSystem(s, player);
+      JumpSystem(s, player);
+      ControlSystem(s, player);
+
+      CameraSystem(s, player, camera, bounds);
+      RenderSystem(s, camera);
 
       engine.create().addComponent({
         position: new PositionComponent({
@@ -37,8 +43,9 @@ export default function() {
           x: 0,
           width: 384,
           height: 16,
+          solid: true,
         }),
-        solid: true,
+        render: new RenderComponent(),
       });
 
       engine.create().addComponent({
@@ -47,8 +54,20 @@ export default function() {
           x: 192,
           width: 16,
           height: 16,
+          solid: true,
         }),
-        solid: true,
+        render: new RenderComponent(),
+      });
+
+      engine.create().addComponent({
+        position: new PositionComponent({
+          y: 96,
+          x: 192,
+          width: 16,
+          height: 16,
+        }),
+        grab: true,
+        render: new RenderComponent({ fill: "#FF0000" }),
       });
 
       engine.create().addComponent({
@@ -57,6 +76,7 @@ export default function() {
           y: 120,
           width: 24,
           height: 8,
+          solid: [  NaN, 1 ],
         }),
         movement: new MovementComponent({}),
         path: new PathComponent({
@@ -68,7 +88,7 @@ export default function() {
           ],
           repeat: true,
         }),
-        solid: true,
+        render: new RenderComponent({ fill: "#0000FF" }),
       });
 
       engine.create().addComponent({
@@ -77,6 +97,7 @@ export default function() {
           y: 88,
           width: 24,
           height: 8,
+          solid: true,
         }),
         movement: new MovementComponent({}),
         path: new PathComponent({
@@ -89,34 +110,8 @@ export default function() {
           ],
           repeat: true,
         }),
-        solid: true,
+        render: new RenderComponent({ fill: "#0000FF" }),
       });
-    });
-
-    s.on("interval", (ev, engine) => {
-      MovementSystem(ev, engine, bounds);
-      landing(ev, engine, player);
-      CollisionSystem(engine, bounds);
-    });
-
-    s.on("bump", (ev, engine) => {
-      landing(ev, engine, player);
-    });
-
-    s.on("render", (ev, engine) => {
-      ev.ctx.fillStyle = "white";
-      ev.ctx.fillRect(0, 0, ev.width, ev.height);
-
-      CameraSystem(engine, player, camera, bounds);
-      RenderSystem(ev.ctx, engine, camera);
-    });
-
-    s.on("keydown", (ev, engine) => {
-      ControlSystem(ev, engine, player);
-    });
-
-    s.on("keyup", (ev, engine) => {
-      ControlSystem(ev, engine, player);
     });
 
     s.on("error", (error) => {

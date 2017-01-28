@@ -1,75 +1,46 @@
 import { shapeFor } from "../util/shape";
 
-export default function LandingSystem() {
-  let bumps = [];
+export default function LandingSystem(state) {
+  let bumps = {};
 
-  return (event, engine, target) => {
-    switch (event.type) {
-    case "interval":
-      engine.run(target, [ "control", "position", "movement" ], (e) => {
-        let landing = null;
+  state.on("postcollision", (event, engine) => {
+    engine.run([ "position" ], (e) => {
+      const b1 = shapeFor(e).bounds();
+      b1.bottom += 1;
+      b1.top = b1.bottom;
+      const s = (e.position.landing == null ? bumps[e.meta.id] :
+                 event.data.queryBounds(b1, e.meta.id).map((f) => f.entity));
 
-        if (bumps.length === 1) {
-          landing = bumps[0];
-        } else {
-          let bounds = shapeFor(e).bounds();
-          let d = Infinity;
+      let d = -Infinity;
+      let m = null;
 
-          for (let b of bumps) {
-            let other = shapeFor(b).bounds();
-            let f = Math.min(bounds.right, other.right) -
-                    Math.max(bounds.left, other.left);
-
-            if (f < Infinity) {
-              landing = b;
-              d = f;
-            }
-          }
+      engine.run(s, [ "position" ], (f) => {
+        const b2 = shapeFor(f).bounds();
+        const v = Math.abs(Math.min(b1.right, b2.right) -
+                           Math.max(b1.left, b2.left));
+        if (v > d) {
+          d = v;
+          m = f;
         }
-
-        if (landing == null) {
-          engine.run(e.control.landed, [ "position" ], (f) => {
-            let b1 = shapeFor(e).bounds();
-            let b2 = shapeFor(f).bounds();
-
-            if (e.movement.ySpeed > 0 &&
-                b1.left <= b2.right && b1.right >= b2.left) {
-              landing = f;
-            }
-          });
-        }
-
-        bumps.length = 0;
-        e.control.landed = landing;
-
-        engine.run(landing, [ "position", "movement" ], (f) => {
-          const dt = event.dt / 1000;
-
-          if (e.movement.xSpeed === 0) {
-            e.position.x = _phaseSync(e.position.x, f.position.x,
-                                      f.movement.xSpeed, dt);
-          }
-
-          e.position.y = _phaseSync(e.position.y, f.position.y,
-                                    f.movement.ySpeed, dt);
-
-          e.position.x += f.movement.xSpeed * dt;
-          e.position.y += f.movement.ySpeed * dt;
-        });
       });
 
-      break;
-    case "bump":
-      if (event.mtv[1] > 0) {
-        bumps.push(event.target);
-      }
-      break;
+      e.position.landing = m;
+    });
+
+    bumps = {};
+  });
+
+  state.on("bump", (event, engine) => {
+    if (event.mtv[1] > 0) {
+      engine.run(event.entity, [ "position" ], (e) => {
+        engine.run(event.target, [ "position" ], (f) => {
+          if (bumps[e.meta.id] == null) {
+            bumps[e.meta.id] = [ f ];
+          } else {
+            bumps[e.meta.id].push(f);
+          }
+        });
+      });
     }
-  };
-}
-
-function _phaseSync(a, b, d, dt) {
-  let old = b - d * dt;
-
-  return Math.floor(a) + (old - Math.floor(old));
+  });
 }

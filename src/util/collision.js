@@ -31,7 +31,7 @@ export default class Collision {
   }
 
   queryBounds(bounds, id) {
-    const mask = shapeFor(entity);
+    const mask = fromBounds(bounds);
     const dest = new Map();
     const rval = [];
 
@@ -74,7 +74,7 @@ function _add(entity, node, bounds, depth) {
 
   if (node.children) {
     for (let n of node.children) {
-      _add(entities, n, bounds, depth + 1);
+      _add(entity, n, bounds, depth + 1);
     }
   } else {
     if (_checkBounds(node, bounds)) {
