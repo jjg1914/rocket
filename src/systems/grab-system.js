@@ -1,13 +1,16 @@
 import { Keys } from "../modules/input";
 import { shapeFor } from "../util/shape";
 
-export default function GrabSystem(state, target) {
-  let collisions = [];
+export default class GrabSystem {
+  constructor(target) {
+    this._target = target;
+    this._collisions = [];
+  }
 
-  state.on("interval", (event, engine) => {
-    collisions.length = 0;
+  interval(event, engine) {
+    this._collisions.length = 0;
 
-    engine.run(target, [ "control", "position" ], (e) => {
+    engine.run(this._target, [ "control", "position" ], (e) => {
       engine.run(e.control.grabed, [ "position" ], (f) => {
         let b = shapeFor(e).bounds();
         let c = shapeFor(f).bounds();
@@ -17,23 +20,23 @@ export default function GrabSystem(state, target) {
         f.position.ignoreSolid = true;
       });
     });
-  });
+  }
 
-  state.on("keydown", (event, engine) => {
+  keydown(event, engine) {
     if (event.which === Keys.ARROW_DOWN) {
-      engine.run(target, [ "control" ], (e) => {
-        engine.run(collisions, [ "grab" ], (f) => {
+      engine.run(this._target, [ "control" ], (e) => {
+        engine.run(this._collisions, [ "grab" ], (f) => {
           e.control.grabed = f;
         });
       });
     }
-  });
+  }
 
-  state.on("collision", (event, engine) => {
-    engine.run(target, [], (e) => {
+  collision(event, engine) {
+    engine.run(this._target, [], (e) => {
       if (event.entity.meta.id === e.meta.id) {
-        collisions.push(event.target);
+        this._collisions.push(event.target);
       }
     });
-  });
+  }
 }

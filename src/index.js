@@ -1,11 +1,13 @@
-import Runtime from "./engine/runtime";
+import Engine from "./engine/engine";
 import Interval from "./modules/interval";
 import Render from "./modules/render";
 import Input from "./modules/input";
-import Rocket from "./rocket";
+
+import BasicState from "./states/basic-state";
+import TestStage from "./stages/test-stage";
 
 document.addEventListener("DOMContentLoaded", () => {
-  Runtime(Rocket(), (cb) => {
+  new Engine((cb, engine) => {
     const canvas = document.getElementById("stage");
     const renderer = Render(canvas, {
       width: 192,
@@ -16,5 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     Interval(60, renderer(cb));
     Input(canvas, cb);
+
+    engine.push(new BasicState(TestStage));
   });
 });

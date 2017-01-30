@@ -1,31 +1,24 @@
 export default class State {
   constructor(builder) {
-    this._listeners = {};
-
-    if (builder != null) {
-      builder(this);
-    }
+    this._systems = [];
   }
 
   send(event, engine) {
     const type = (event instanceof Error ? "error" : event.type);
+    let rval = false;
 
-    if (this._listeners[type]) {
-      for (let handler of this._listeners[type]) {
-        handler(event, engine);
+    for (let system of this._systems) {
+      if (typeof system[type] === "function") {
+        system[type](event, engine);
+        rval = true;
       }
-      return true;
-    } else {
-      return false;
     }
+
+    return rval;
   }
 
-  on(event, handler) {
-    if (this._listeners[event] == null) {
-      this._listeners[event] = [];
-    }
-
-    this._listeners[event].push(handler);
+  addSystem(system) {
+    this._systems.push(system);
 
     return this;
   }

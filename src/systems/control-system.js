@@ -1,17 +1,21 @@
 import { Keys } from "../modules/input";
 
-export default function ControlSystem(state, target) {
-  state.on("keydown", (event, engine) => {
-    engine.run(target, [ "control", "movement" ], (e) => {
+export default class ControlSystem {
+  constructor(target) {
+    this._target = target;
+  }
+
+  keydown(event, engine) {
+    engine.run(this._target, [ "control", "movement" ], (e) => {
       e.movement.xAccel += _accel(event.which, e.control.xAccel);
     });
-  });
+  }
 
-  state.on("keyup", (event, engine) => {
-    engine.run(target, [ "control", "movement" ], (e) => {
+  keyup(event, engine) {
+    engine.run(this._target, [ "control", "movement" ], (e) => {
       e.movement.xAccel -= _accel(event.which, e.control.xAccel);
     });
-  });
+  }
 }
 
 function _accel(which, accel) {

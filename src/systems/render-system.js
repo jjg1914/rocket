@@ -1,12 +1,16 @@
-export default function RenderSystem(state, camera) {
-  state.on("render", (event, engine) => {
-    let [ cameraX, cameraY ] = camera.position();
+export default class RenderSystem {
+  constructor(camera) {
+    this._camera = camera;
+  }
+
+  render(event, engine) {
+    let [ cameraX, cameraY ] = this._camera.position();
 
     event.ctx.fillStyle = "white";
     event.ctx.fillRect(0, 0, event.width, event.height);
    
     engine.run([ "position", "render" ], (e) => {
-      if (camera.isInView(e)) {
+      if (this._camera.isInView(e)) {
         if (e.render.stroke != null) {
           event.ctx.strokeStyle = e.render.stroke;
           event.ctx.strokeRect(e.position.x - cameraX,
@@ -24,5 +28,5 @@ export default function RenderSystem(state, camera) {
         }
       }
     });
-  });
+  }
 }

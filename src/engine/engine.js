@@ -1,12 +1,16 @@
-import Entity from "./entity";
-
 export default class Engine {
-  constructor() {
+  constructor(builder) {
     this._entityCounter = 0;
     this._entities = new Map();
 
     this._states = [];
     this._events = [];
+
+    if (builder != null) {
+      builder((event) => {
+        this.emit(event);
+      }, this);
+    }
   }
 
   run(target, filters, f) {
@@ -83,26 +87,31 @@ export default class Engine {
     return this.pop().push(state);
   }
 
-  create() {
+  addEntity(entity) {
     this._entityCounter += 1;
 
-    const entity = new Entity();
     this._entities.set(this._entityCounter, entity);
 
-    return entity.addComponent({
-      meta: {
-        id: this._entityCounter,
-        engine: this,
-      },
-    });
+    entity.meta = {
+      id: this._entityCounter,
+    };
+
+    return entity;
   }
 
-  destroy(entity) {
+  removeEntity(entity) {
     this._entities.delete(entity.meta.id);
+    delete entity.meta;
+
+    return entity;
   }
 }
 
 function _filter(e, filters, funcs) {
+  if (!_filterHasProperty("meta", e)) {
+    return false;
+  }
+
   for (let i = 0; i < filters.length; ++i) {
     if (!funcs[i](filters[i], e)) {
       return false;

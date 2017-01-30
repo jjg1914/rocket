@@ -1,14 +1,16 @@
 import { shapeFor } from "../util/shape";
 
-export default function LandingSystem(state) {
-  let bumps = {};
+export default class LandingSystem {
+  constructor() {
+    this._bumps = {};
+  }
 
-  state.on("postcollision", (event, engine) => {
+  postcollision(event, engine) {
     engine.run([ "position" ], (e) => {
       const b1 = shapeFor(e).bounds();
       b1.bottom += 1;
       b1.top = b1.bottom;
-      const s = (e.position.landing == null ? bumps[e.meta.id] :
+      const s = (e.position.landing == null ? this._bumps[e.meta.id] :
                  event.data.queryBounds(b1, e.meta.id).map((f) => f.entity));
 
       let d = -Infinity;
@@ -27,20 +29,20 @@ export default function LandingSystem(state) {
       e.position.landing = m;
     });
 
-    bumps = {};
-  });
+    this._bumps = {};
+  }
 
-  state.on("bump", (event, engine) => {
+  bump(event, engine) {
     if (event.mtv[1] > 0) {
       engine.run(event.entity, [ "position" ], (e) => {
         engine.run(event.target, [ "position" ], (f) => {
-          if (bumps[e.meta.id] == null) {
-            bumps[e.meta.id] = [ f ];
+          if (this._bumps[e.meta.id] == null) {
+            this._bumps[e.meta.id] = [ f ];
           } else {
-            bumps[e.meta.id].push(f);
+            this._bumps[e.meta.id].push(f);
           }
         });
       });
     }
-  });
+  }
 }

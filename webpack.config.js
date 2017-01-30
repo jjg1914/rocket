@@ -11,10 +11,14 @@ module.exports = {
     filename: "[name].js",
   },
   resolve: {
-    extensions: [ '', '.js', '.scss' ],
+    extensions: [ '', '.js', ".json", '.scss' ],
   },
   module: {
     loaders: [
+      {
+        test: /\.json$/,
+        loader: "json-loader",
+      },
       {
         test: /\.js$/,
         loader: "babel-loader",

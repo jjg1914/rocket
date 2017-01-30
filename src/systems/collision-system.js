@@ -1,9 +1,13 @@
 import Collision from "../util/collision";
 import { shapeFor } from "../util/shape";
 
-export default function CollisionSystem(state, bounds) {
-  state.on("interval", (event, engine) => {
-    const collision = new Collision(bounds);
+export default class CollisionSystem {
+  constructor(bounds) {
+    this._bounds = bounds;
+  }
+
+  interval(event, engine) {
+    const collision = new Collision(this._bounds);
     const translations = [];
 
     engine.run([ "position" ], (e) => {
@@ -150,5 +154,5 @@ export default function CollisionSystem(state, bounds) {
         }
       }
     }
-  });
+  }
 }

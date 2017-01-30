@@ -1,8 +1,13 @@
 import Path from "../util/path";
 import { shapeFor } from "../util/shape";
 
-export default function MovementSystem(state, bounds, gravity) {
-  state.on("interval", (event, engine) => {
+export default class MovementSystem {
+  constructor(bounds, gravity) {
+    this._bounds = bounds;
+    this._gravity = gravity;
+  }
+
+  interval(event, engine) {
     const dt = event.dt / 1000;
 
     engine.run([ "path", "position", "movement" ], (e) => {
@@ -31,7 +36,7 @@ export default function MovementSystem(state, bounds, gravity) {
 
     engine.run([ "!path", "movement" ], (e) => {
       let friction = e.movement.friction;
-      let g = (e.position.landing == null ? gravity : 0);
+      let g = (e.position.landing == null ? this._gravity : 0);
 
       engine.run(e.position.landing, [ "movement" ], (f) => {
         friction = f.movement.friction;
@@ -99,18 +104,20 @@ export default function MovementSystem(state, bounds, gravity) {
         const oldX = e.position.x;
         const oldY = e.position.y;
 
-        e.position.x = Math.min(Math.max(bounds.left, b.left), bounds.right - w);
+        e.position.x = Math.min(Math.max(this._bounds.left, b.left),
+                                this._bounds.right - w);
         if (e.position.x !== oldX) {
           e.movement.xSpeed = 0;
         }
 
-        e.position.y = Math.min(Math.max(bounds.top, b.top), bounds.bottom - h);
+        e.position.y = Math.min(Math.max(this._bounds.top, b.top),
+                                this._bounds.bottom - h);
         if (e.position.y !== oldY) {
           e.movement.ySpeed = 0;
         }
       }
     });
-  });
+  }
 }
 
 function _accel(dt, speed, accel, max, friction) {

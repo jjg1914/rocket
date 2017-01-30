@@ -1,10 +1,16 @@
 import { shapeFor } from "../util/shape";
 
-export default function CameraSystem(state, target, camera, bounds) {
-  state.on("render", (event, engine) => {
-    engine.run(target, [ "position" ], (e) => {
+export default class CameraSystem {
+  constructor(camera, target, bounds) {
+    this._camera = camera;
+    this._target = target;
+    this._bounds = bounds;
+  }
+
+  render(event, engine) {
+    engine.run(this._target, [ "position" ], (e) => {
       const targetBounds = shapeFor(e).bounds();
-      const [ cameraW, cameraH ] = camera.dimensions();
+      const [ cameraW, cameraH ] = this._camera.dimensions();
 
       let [ x, y ] = [
         (targetBounds.left + targetBounds.right) / 2,
@@ -17,10 +23,12 @@ export default function CameraSystem(state, target, camera, bounds) {
       x = Number((Math.floor(x) + (targetBounds.left % 1)).toFixed(4));
       y = Number((Math.floor(y) + (targetBounds.top % 1)).toFixed(4));
 
-      x = Math.min(Math.max(x, bounds.left), bounds.right - cameraW);
-      y = Math.min(Math.max(y, bounds.top), bounds.bottom - cameraH);
+      x = Math.min(Math.max(x, this._bounds.left),
+                   this._bounds.right - cameraW);
+      y = Math.min(Math.max(y, this._bounds.top),
+                   this._bounds.bottom - cameraH);
 
-      camera.position(x, y);
+      this._camera.position(x, y);
     });
-  });
+  }
 }
