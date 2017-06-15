@@ -1,4 +1,4 @@
-import { shapeFor } from "../util/shape";
+import { Shape } from "mu-engine";
 
 export default class LandingSystem {
   constructor() {
@@ -7,7 +7,7 @@ export default class LandingSystem {
 
   postcollision(event, engine) {
     engine.run([ "position" ], (e) => {
-      const b1 = shapeFor(e).bounds();
+      const b1 = Shape.shapeFor(e).bounds();
       b1.bottom += 1;
       b1.top = b1.bottom;
       const s = (e.position.landing == null ? this._bumps[e.meta.id] :
@@ -17,7 +17,7 @@ export default class LandingSystem {
       let m = null;
 
       engine.run(s, [ "position" ], (f) => {
-        const b2 = shapeFor(f).bounds();
+        const b2 = Shape.shapeFor(f).bounds();
         const v = Math.abs(Math.min(b1.right, b2.right) -
                            Math.max(b1.left, b2.left));
         if (v > d) {

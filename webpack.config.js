@@ -11,7 +11,7 @@ module.exports = {
     filename: "[name].js",
   },
   resolve: {
-    extensions: [ '', '.js', ".json", '.scss' ],
+    extensions: [ '.js', ".json", '.scss' ],
   },
   module: {
     loaders: [
@@ -29,7 +29,10 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract("style-loader", "css-loader!autoprefixer-loader!sass-loader"),
+        loader: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: "css-loader!autoprefixer-loader!sass-loader",
+        }),
       },
     ],
   },
@@ -38,6 +41,10 @@ module.exports = {
       template: "src/index.html",
       inject: "head",
     }),
-    new ExtractTextPlugin("[name].css", { allChunks: true }),
+    new ExtractTextPlugin({
+      filename: "[name].css",
+      disable: false,
+      allChunks: true,
+    }),
   ],
 }

@@ -1,7 +1,10 @@
-import PositionComponent from "../components/position-component";
-import MovementComponent from "../components/movement-component";
+import {
+  PositionComponent,
+  MovementComponent,
+  RenderComponent,
+} from "mu-engine";
+
 import ControlComponent from "../components/control-component";
-import RenderComponent from "../components/render-component";
 
 export default class PlayerEntity {
   constructor(x, y) {

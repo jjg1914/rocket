@@ -1,7 +1,9 @@
-import Engine from "./engine/engine";
-import Interval from "./modules/interval";
-import Render from "./modules/render";
-import Input from "./modules/input";
+import {
+  Engine,
+  IntervalModule,
+  RenderModule,
+  InputModule,
+} from "mu-engine";
 
 import BasicState from "./states/basic-state";
 import TestStage from "./stages/test-stage";
@@ -9,15 +11,15 @@ import TestStage from "./stages/test-stage";
 document.addEventListener("DOMContentLoaded", () => {
   new Engine((cb, engine) => {
     const canvas = document.getElementById("stage");
-    const renderer = Render(canvas, {
+    const renderer = RenderModule(canvas, {
       width: 192,
       height: 144,
       smoothing: false,
       scale: 2,
     });
 
-    Interval(60, renderer(cb));
-    Input(canvas, cb);
+    IntervalModule(60, renderer(cb));
+    InputModule(canvas, cb);
 
     engine.push(new BasicState(TestStage));
   });

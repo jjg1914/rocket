@@ -1,5 +1,4 @@
-import { Keys } from "../modules/input";
-import { shapeFor } from "../util/shape";
+import { Keys, Shape } from "mu-engine";
 
 export default class GrabSystem {
   constructor(target) {
@@ -12,8 +11,8 @@ export default class GrabSystem {
 
     engine.run(this._target, [ "control", "position" ], (e) => {
       engine.run(e.control.grabed, [ "position" ], (f) => {
-        let b = shapeFor(e).bounds();
-        let c = shapeFor(f).bounds();
+        let b = Shape.shapeFor(e).bounds();
+        let c = Shape.shapeFor(f).bounds();
 
         f.position.x = ((b.right + b.left) / 2) - ((c.right - c.left) / 2);
         f.position.y = b.top - (c.bottom - c.top);

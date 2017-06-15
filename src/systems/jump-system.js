@@ -1,4 +1,4 @@
-import { Keys } from "../modules/input";
+import { Keys } from "mu-engine";
 
 export default class JumpSystem {
   constructor(target) {

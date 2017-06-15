@@ -1,10 +1,12 @@
-import Stage from "../util/stage";
+import {
+  PositionComponent,
+  MovementComponent,
+  PathComponent,
+  RenderComponent,
+} from "mu-engine";
 
-import PositionComponent from "../components/position-component";
-import MovementComponent from "../components/movement-component";
-import PathComponent from "../components/path-component";
+import Stage from "../util/stage";
 import GrabComponent from "../components/grab-component";
-import RenderComponent from "../components/render-component";
 
 export default class StageSystem {
   constructor(target, data) {
