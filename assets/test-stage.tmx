@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="24" height="9" tilewidth="16" tileheight="16" nextobjectid="14">
+ <layer name="Tile Layer 1" width="24" height="9">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup name="Object Layer 1">
+  <object id="1" name="floor" x="0" y="128" width="384" height="16">
+   <properties>
+    <property name="position.solid" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="7" name="nub" x="192" y="112" width="16" height="16">
+   <properties>
+    <property name="position.solid" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="9" name="grabable" x="192" y="96" width="16" height="16">
+   <properties>
+    <property name="grab" type="bool" value="true"/>
+    <property name="render.fill" type="color" value="#ffff0000"/>
+   </properties>
+  </object>
+  <object id="10" name="platform-1" x="72" y="56" width="24" height="8">
+   <properties>
+    <property name="movement" value="{}"/>
+    <property name="path.path" type="file" value="path-1.json"/>
+    <property name="path.repeat" type="bool" value="true"/>
+    <property name="position.solid" value="[  null, 1 ]"/>
+    <property name="render.fill" type="color" value="#ff0000ff"/>
+   </properties>
+  </object>
+  <object id="11" name="platform-2" x="264" y="68" width="24" height="8">
+   <properties>
+    <property name="movement" value="{}"/>
+    <property name="path.path" type="file" value="path-2.json"/>
+    <property name="path.repeat" type="bool" value="true"/>
+    <property name="position.solid" value="[  null, 1 ]"/>
+    <property name="render.fill" type="color" value="#ff0000ff"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

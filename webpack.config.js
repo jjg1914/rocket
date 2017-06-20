@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const StageLoader = require("./src/util/stage-loader");
 
 module.exports = {  
   devtool: "source-map",
@@ -11,7 +12,10 @@ module.exports = {
     filename: "[name].js",
   },
   resolve: {
-    extensions: [ '.js', ".json", '.scss' ],
+    extensions: [ '.js', ".json", '.scss', '.tmx' ],
+  },
+  resolveLoader: {
+    modules: [ "node_modules", "src/util" ],
   },
   module: {
     loaders: [
@@ -33,6 +37,10 @@ module.exports = {
           fallback: "style-loader",
           use: "css-loader!autoprefixer-loader!sass-loader",
         }),
+      },
+      {
+        test: /\.tmx$/,
+        loader: "stage-loader",
       },
     ],
   },

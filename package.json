@@ -28,6 +28,7 @@
     "webpack-dev-server": "^2.4.5"
   },
   "dependencies": {
-    "mu-engine": "^0.2.4"
+    "mu-engine": "^0.2.4",
+    "xml2js": "^0.4.17"
   }
 }
