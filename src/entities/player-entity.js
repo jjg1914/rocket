@@ -2,6 +2,7 @@ import {
   PositionComponent,
   MovementComponent,
   RenderComponent,
+  Shape,
 } from "mu-engine";
 
 import ControlComponent from "../components/control-component";
@@ -13,6 +14,7 @@ export default class PlayerEntity {
       y: y,
       width: 16,
       height: 16,
+      //mask: new Shape.Circle(8, 0, 0),
     });
 
     this.movement = new MovementComponent({

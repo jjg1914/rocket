@@ -15,7 +15,7 @@ export default class GrabSystem {
         let c = Shape.shapeFor(f).bounds();
 
         f.position.x = ((b.right + b.left) / 2) - ((c.right - c.left) / 2);
-        f.position.y = b.top - (c.bottom - c.top);
+        f.position.y = b.top - (c.bottom - c.top + 1);
         f.position.ignoreSolid = true;
       });
     });

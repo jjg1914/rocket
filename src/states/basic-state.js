@@ -32,7 +32,7 @@ export default class BasicState extends State {
     this.addSystem(new CollisionSystem(this._stage.bounds()));
     this.addSystem(new LandingSystem());
 
-    this._player = new PlayerEntity(0, 112);
+    this._player = new PlayerEntity(320, 112);
 
     this.addSystem(new ControlSystem(this._player));
     this.addSystem(new GrabSystem(this._player));
