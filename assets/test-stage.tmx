@@ -14,57 +14,21 @@
 </data>
  </layer>
  <objectgroup name="Object Layer 1">
-  <object id="1" name="floor-1" x="0" y="128" width="368" height="16">
+  <object id="1" name="floor-1" type="floor" x="0" y="128" width="368" height="16"/>
+  <object id="7" name="nub" type="floor" x="192" y="112" width="16" height="16"/>
+  <object id="9" name="grabable-1" type="grab" x="192" y="96" width="16" height="16"/>
+  <object id="10" name="platform-1" type="platform" x="72" y="24" width="24" height="8">
    <properties>
-    <property name="position.solid" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="7" name="nub" x="192" y="112" width="16" height="16">
-   <properties>
-    <property name="position.solid" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="9" name="grabable-1" x="192" y="96" width="16" height="16">
-   <properties>
-    <property name="grab" value="{}"/>
-    <property name="render.fill" type="color" value="#ffff0000"/>
-   </properties>
-  </object>
-  <object id="10" name="platform-1" x="72" y="24" width="24" height="8">
-   <properties>
-    <property name="movement" value="{}"/>
     <property name="path.path" type="file" value="path-1.json"/>
-    <property name="path.repeat" type="bool" value="true"/>
-    <property name="position.solid" value="[  null, 1 ]"/>
-    <property name="render.fill" type="color" value="#ff0000ff"/>
    </properties>
   </object>
-  <object id="11" name="platform-2" x="264" y="68" width="24" height="8">
+  <object id="11" name="platform-2" type="platform" x="264" y="68" width="24" height="8">
    <properties>
-    <property name="movement" value="{}"/>
     <property name="path.path" type="file" value="path-2.json"/>
-    <property name="path.repeat" type="bool" value="true"/>
-    <property name="position.solid" value="[  null, 1 ]"/>
-    <property name="render.fill" type="color" value="#ff0000ff"/>
    </properties>
   </object>
-  <object id="14" name="grabable-2" x="144" y="112" width="16" height="16">
-   <properties>
-    <property name="grab" value="{}"/>
-    <property name="render.fill" type="color" value="#ffff0000"/>
-   </properties>
-   <ellipse/>
-  </object>
-  <object id="21" name="floor-2" x="432" y="96" width="144" height="16">
-   <properties>
-    <property name="position.solid" type="bool" value="true"/>
-    <property name="render.fill" type="color" value="#ff000000"/>
-   </properties>
-  </object>
-  <object id="24" name="ramp-1" x="368" y="128">
-   <properties>
-    <property name="position.solid" type="bool" value="true"/>
-   </properties>
+  <object id="21" name="floor-2" type="floor" x="432" y="96" width="144" height="16"/>
+  <object id="24" name="ramp-1" type="floor" x="368" y="128">
    <polygon points="0,0 64,-32 64,0"/>
   </object>
  </objectgroup>

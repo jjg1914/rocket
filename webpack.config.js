@@ -5,14 +5,14 @@ const StageLoader = require("./src/util/stage-loader");
 module.exports = {  
   devtool: "source-map",
   entry: {
-    index: [ "./src/index.js", "./src/index.scss" ],
+    index: [ "./src/index.ts", "./src/index.scss" ],
   },
   output: {
     path: __dirname + "/public",
     filename: "[name].js",
   },
   resolve: {
-    extensions: [ '.js', ".json", '.scss', '.tmx' ],
+    extensions: [ '.js', '.ts', ".json", '.scss', '.tmx' ],
   },
   resolveLoader: {
     modules: [ "node_modules", "src/util" ],
@@ -22,6 +22,10 @@ module.exports = {
       {
         test: /\.json$/,
         loader: "json-loader",
+      },
+      {
+        test: /\.ts$/,
+        loader: "ts-loader",
       },
       {
         test: /\.js$/,
