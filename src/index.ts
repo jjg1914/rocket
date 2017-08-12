@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
     new StageEntity({
       assets: assets,
       stage: "test-stage.tmx",
-      interval: { fps: 60 },
       input: {
         canvas: canvas,
       },

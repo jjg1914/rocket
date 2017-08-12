@@ -3,7 +3,6 @@ import {
   shapeFor,
   Entity,
   PositionData,
-  Constructor,
   InputEventData,
   ResolutionEventData,
   CollisionEntity,
@@ -31,57 +30,50 @@ export class GrabEvent implements GrabEventData {
   }
 }
 
-export function GrabSystem(klass: Constructor<GrabEntity>)
-: Constructor<GrabEntity> {
-  return class extends klass {
-    constructor(...args: any[]) {
-      super(...args);
-      
-      const _collisions: CollisionEntity[] = [];
-      let _grab = false;
+export function GrabSystem(entity: GrabEntity): void {
+  const _collisions: CollisionEntity[] = [];
+  let _grab = false;
 
-      this.on("keydown", (event: InputEventData) => {
-        if (event.which === Keys.ARROW_DOWN) {
-          if (this.grab.target == null) {
-            _grab = true;
-          } else {
-            this.grab.target.position.ignoreSolid = false;
-            this.grab.target = null;
-            this.grab.mode = null;
-          }
-        }
-      });
-
-      this.on("collision", (event: ResolutionEventData) => {
-        if (_grab) {
-          _collisions.push(event.target);
-        }
-      });
-
-      this.on("postcollision", () => {
-        _grab = false;
-
-        for (let e of _collisions) {
-          if (e.send("grab", new GrabEvent(this))) {
-            break;
-          }
-        }
-
-        _collisions.length = 0;
-
-        if (this.grab.target != null) {
-          const b = shapeFor(this).bounds();
-          const c = shapeFor(this.grab.target).bounds();
-
-          this.grab.target.position.x = ((b.right + b.left) / 2) - ((c.right - c.left) / 2);
-          this.grab.target.position.y = b.top - (c.bottom - c.top + 1);
-          this.grab.target.position.ignoreSolid = true;
-          this.grab.target.position.landing = null;
-          if (this.grab.target.movement != null) {
-            this.grab.target.movement.ySpeed = 0;
-          }
-        }
-      });
+  entity.on("keydown", (event: InputEventData) => {
+    if (event.which === Keys.ARROW_DOWN) {
+      if (entity.grab.target == null) {
+        _grab = true;
+      } else {
+        entity.grab.target.position.ignoreSolid = false;
+        entity.grab.target = null;
+        entity.grab.mode = null;
+      }
     }
-  }
+  });
+
+  entity.on("collision", (event: ResolutionEventData) => {
+    if (_grab) {
+      _collisions.push(event.target);
+    }
+  });
+
+  entity.on("postcollision", () => {
+    _grab = false;
+
+    for (let e of _collisions) {
+      if (e.send("grab", new GrabEvent(entity))) {
+        break;
+      }
+    }
+
+    _collisions.length = 0;
+
+    if (entity.grab.target != null) {
+      const b = shapeFor(entity).bounds();
+      const c = shapeFor(entity.grab.target).bounds();
+
+      entity.grab.target.position.x = ((b.right + b.left) / 2) - ((c.right - c.left) / 2);
+      entity.grab.target.position.y = b.top - (c.bottom - c.top + 1);
+      entity.grab.target.position.ignoreSolid = true;
+      entity.grab.target.position.landing = null;
+      if (entity.grab.target.movement != null) {
+        entity.grab.target.movement.ySpeed = 0;
+      }
+    }
+  });
 }

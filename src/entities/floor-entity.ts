@@ -6,22 +6,18 @@ import {
   CollisionSystem,
   RenderSystem,
   BaseEntity,
-  mixin,
 } from "mu-engine";
 
 export interface FloorConfig {
-  position: PositionData;
-  render: RenderData;
+  position: Partial<PositionData>;
+  render: Partial<RenderData>;
 }
 
-export const FloorEntity = mixin([
-  RenderSystem,
-  CollisionSystem,
-], class extends BaseEntity {
+export class FloorEntity extends BaseEntity {
   position: PositionData;
   render: RenderData;
 
-  constructor(config: FloorConfig) {
+  constructor(config: Partial<FloorConfig>) {
     super();
 
     this.position = new PositionComponent(Object.assign({
@@ -30,5 +26,8 @@ export const FloorEntity = mixin([
     this.render = new RenderComponent(Object.assign({
       fill: "#000000",
     }, config.render));
+
+    RenderSystem(this);
+    CollisionSystem(this);
   }
-});
+}

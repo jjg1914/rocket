@@ -10,29 +10,22 @@ import {
   AccelSystem,
   RenderSystem,
   BaseEntity,
-  mixin,
 } from "mu-engine";
 
 import { GrabPickupSystem } from "../systems/grab-pickup-system";
 
 export interface GrabConfig {
-  position: PositionData;
-  render: RenderData;
-  movement: MovementData;
+  position: Partial<PositionData>;
+  render: Partial<RenderData>;
+  movement: Partial<MovementData>;
 }
 
-export const GrabEntity = mixin([
-  RenderSystem,
-  GrabPickupSystem,
-  CollisionSystem,
-  MoveSystem,
-  AccelSystem,
-], class extends BaseEntity {
+export class GrabEntity extends BaseEntity {
   position: PositionData;
   render: RenderData;
   movement: MovementData;
 
-  constructor(config: GrabConfig) {
+  constructor(config: Partial<GrabConfig>) {
     super();
 
     this.position = new PositionComponent(config.position);
@@ -40,5 +33,11 @@ export const GrabEntity = mixin([
     this.render = new RenderComponent(Object.assign({
       fill: "#FF0000",
     }, config.render));
+
+    GrabPickupSystem(this);
+    RenderSystem(this);
+    CollisionSystem(this);
+    MoveSystem(this);
+    AccelSystem(this);
   }
-});
+}

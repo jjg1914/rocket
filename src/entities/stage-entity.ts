@@ -1,17 +1,13 @@
 import {
   CollectionEntity,
-  IntervalConfig,
   IntervalModule,
   InputConfig,
   InputModule,
   RenderConfig,
   RenderModule,
-  MoveConfig,
   MoveModule,
-  CollisionConfig,
   CollisionModule,
   Assets,
-  mixin,
 } from "mu-engine";
 
 import { PlayerEntity } from "../entities/player-entity";
@@ -19,23 +15,13 @@ import { GrabEntity } from "../entities/grab-entity";
 import { FloorEntity } from "../entities/floor-entity";
 import { PlatformEntity } from "../entities/platform-entity";
 
-export interface StageConfig extends IntervalConfig,
-                                     InputConfig,
-                                     RenderConfig,
-                                     MoveConfig,
-                                     CollisionConfig {
+export interface StageConfig {
   assets: Assets;
   stage: string;
 }
 
-export const StageEntity = mixin([
-  RenderModule,
-  CollisionModule,
-  MoveModule,
-  IntervalModule,
-  InputModule,
-], class extends CollectionEntity {
-  constructor(config: StageConfig ) {
+export class StageEntity extends CollectionEntity {
+  constructor(config: StageConfig & InputConfig & RenderConfig) {
     super();
 
     const stage = config.assets.load(config.stage);
@@ -55,9 +41,10 @@ export const StageEntity = mixin([
       assets: config.assets,
     });
 
-    Object.assign(config, {
-      collision: { bounds: stage.bounds() },
-      move: { gravity: 208, bounds: stage.bounds() },
-    });
+    RenderModule(this, config);
+    CollisionModule(this, { collision: { bounds: stage.bounds() } });
+    MoveModule(this, { move: { gravity: 208, bounds: stage.bounds() } });
+    IntervalModule(this, { interval: { fps: 60 } });
+    InputModule(this, config);
   };
-});
+}

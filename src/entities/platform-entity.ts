@@ -11,27 +11,22 @@ import {
   PathSystem,
   RenderSystem,
   BaseEntity,
-  mixin,
 } from "mu-engine";
 
 export interface FloorConfig {
-  position?: PositionData;
-  movement?: MovementData;
-  path?: PathData;
-  render?: RenderData;
+  position: Partial<PositionData>;
+  movement: Partial<MovementData>;
+  path: Partial<PathData>;
+  render: Partial<RenderData>;
 }
 
-export const PlatformEntity = mixin([
-  RenderSystem,
-  CollisionSystem,
-  PathSystem,
-], class extends BaseEntity {
+export class PlatformEntity extends BaseEntity {
   position: PositionData;
   render: RenderData;
   movement: MovementData;
   path: PathData;
 
-  constructor(config: FloorConfig) {
+  constructor(config: Partial<FloorConfig>) {
     super();
 
     this.position = new PositionComponent(Object.assign({
@@ -44,5 +39,9 @@ export const PlatformEntity = mixin([
     this.render = new RenderComponent(Object.assign({
       fill: "#0000FF",
     }, config.render));
+
+    RenderSystem(this);
+    CollisionSystem(this);
+    PathSystem(this);
   }
-});
+}

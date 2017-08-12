@@ -13,35 +13,26 @@ import {
   CameraSystem,
   RenderSystem,
   BaseEntity,
-  mixin,
 } from "mu-engine";
 
 import { GrabData, GrabComponent } from "../components/grab-component";
 import { GrabSystem } from "../systems/grab-system";
 
-export interface PlayerConfig extends CameraConfig {
-  position: PositionData;
-  render: RenderData;
-  movement: MovementData;
-  grab: GrabData;
+export interface PlayerConfig {
+  position: Partial<PositionData>;
+  render: Partial<RenderData>;
+  movement: Partial<MovementData>;
+  grab: Partial<GrabData>;
 }
 
-export const PlayerEntity = mixin([
-  Control2WaySystem,
-  CameraSystem,
-  RenderSystem,
-  GrabSystem,
-  CollisionSystem,
-  MoveSystem,
-  AccelSystem,
-], class extends BaseEntity {
+export class PlayerEntity extends BaseEntity {
   position: PositionData;
   render: RenderData;
   movement: MovementData;
   grab: GrabData;
   control: { xAccel: number, jumpSpeed: number };
 
-  constructor(config: PlayerConfig) {
+  constructor(config: Partial<PlayerConfig> & CameraConfig) {
     super();
 
     this.position = new PositionComponent(Object.assign({
@@ -66,5 +57,13 @@ export const PlayerEntity = mixin([
       xAccel: 192,
       jumpSpeed: 160,
     };
+
+    GrabSystem(this);
+    Control2WaySystem(this);
+    CameraSystem(this, config);
+    RenderSystem(this);
+    CollisionSystem(this);
+    MoveSystem(this);
+    AccelSystem(this);
   }
-});
+}
