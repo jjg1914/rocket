@@ -1,34 +1,12 @@
 import {
   Keys,
   shapeFor,
-  Entity,
-  PositionData,
   InputEventData,
   ResolutionEventData,
   CollisionEntity,
 } from "mu-engine";
 
-import { GrabData } from "../components/grab-component";
-
-export interface GrabEntity extends Entity {
-  position: PositionData;
-  grab: GrabData;
-}
-
-export interface GrabEventData {
-  type: "grab";
-  target: GrabEntity;
-}
-
-export class GrabEvent implements GrabEventData {
-  type: "grab";
-  target: GrabEntity;
-
-  constructor(target: GrabEntity) {
-    this.type = "grab";
-    this.target = target;
-  }
-}
+import { GrabEntity, GrabEvent } from "../events/grab-event";
 
 export function GrabSystem(entity: GrabEntity): void {
   const _collisions: CollisionEntity[] = [];

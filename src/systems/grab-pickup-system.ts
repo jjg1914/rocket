@@ -2,7 +2,7 @@ import {
   CollisionEntity,
 } from "mu-engine";
 
-import { GrabEventData } from "../systems/grab-system";
+import { GrabEventData } from "../events/grab-event";
 
 export function GrabPickupSystem(entity: CollisionEntity): void {
   entity.on("grab", (event: GrabEventData) => {
