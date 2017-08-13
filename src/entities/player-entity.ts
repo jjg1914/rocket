@@ -30,7 +30,7 @@ export class PlayerEntity extends BaseEntity {
   render: RenderData;
   movement: MovementData;
   grab: GrabData;
-  control: { xAccel: number, jumpSpeed: number };
+  control: { xAccel: number, jumpSpeed: number, jumpCutoff: number };
 
   constructor(config: Partial<PlayerConfig> & CameraConfig) {
     super();
@@ -43,7 +43,7 @@ export class PlayerEntity extends BaseEntity {
     this.movement = new MovementComponent(Object.assign({
       restrict: true,
       xMax: 64,
-      yMax: 192,
+      yMax: 224,
       friction: 128,
     }, config.movement));
 
@@ -55,7 +55,8 @@ export class PlayerEntity extends BaseEntity {
 
     this.control = {
       xAccel: 192,
-      jumpSpeed: 160,
+      jumpSpeed: 224,
+      jumpCutoff: 100,
     };
 
     GrabSystem(this);

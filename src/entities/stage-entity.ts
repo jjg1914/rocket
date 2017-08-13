@@ -14,6 +14,7 @@ import { PlayerEntity } from "../entities/player-entity";
 import { GrabEntity } from "../entities/grab-entity";
 import { FloorEntity } from "../entities/floor-entity";
 import { PlatformEntity } from "../entities/platform-entity";
+import { FallingPlatformEntity } from "../entities/falling-platform-entity";
 
 export interface StageConfig {
   assets: Assets;
@@ -26,7 +27,7 @@ export class StageEntity extends CollectionEntity {
 
     const stage = config.assets.load(config.stage);
     this.put(new PlayerEntity({
-      position: { x: 0, y: 112 },
+      position: { x: 496, y: 80 },
       camera: {
         bounds: stage.bounds(),
         dimensions: { width: 192, height: 144 },
@@ -34,8 +35,10 @@ export class StageEntity extends CollectionEntity {
     }));
     stage.build(this, {
       entities: {
+        default: FloorEntity,
         floor: FloorEntity,
         platform: PlatformEntity,
+        "falling-platform": FallingPlatformEntity,
         grab: GrabEntity,
       },
       assets: config.assets,
@@ -43,7 +46,7 @@ export class StageEntity extends CollectionEntity {
 
     InputModule(this, config);
     IntervalModule(this, { interval: { fps: 60 } });
-    MoveModule(this, { move: { gravity: 208, bounds: stage.bounds() } });
+    MoveModule(this, { move: { gravity: 480, bounds: stage.bounds() } });
     CollisionModule(this, { collision: { bounds: stage.bounds() } });
     RenderModule(this, config);
   };
