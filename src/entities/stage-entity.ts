@@ -41,10 +41,10 @@ export class StageEntity extends CollectionEntity {
       assets: config.assets,
     });
 
-    RenderModule(this, config);
-    CollisionModule(this, { collision: { bounds: stage.bounds() } });
-    MoveModule(this, { move: { gravity: 208, bounds: stage.bounds() } });
-    IntervalModule(this, { interval: { fps: 60 } });
     InputModule(this, config);
+    IntervalModule(this, { interval: { fps: 60 } });
+    MoveModule(this, { move: { gravity: 208, bounds: stage.bounds() } });
+    CollisionModule(this, { collision: { bounds: stage.bounds() } });
+    RenderModule(this, config);
   };
 }

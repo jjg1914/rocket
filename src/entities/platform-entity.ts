@@ -40,8 +40,8 @@ export class PlatformEntity extends BaseEntity {
       fill: "#0000FF",
     }, config.render));
 
-    RenderSystem(this);
-    CollisionSystem(this);
     PathSystem(this);
+    CollisionSystem(this);
+    RenderSystem(this);
   }
 }

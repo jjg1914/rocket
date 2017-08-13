@@ -34,10 +34,12 @@ export class GrabEntity extends BaseEntity {
       fill: "#FF0000",
     }, config.render));
 
+
     GrabPickupSystem(this);
-    RenderSystem(this);
-    CollisionSystem(this);
-    MoveSystem(this);
+
     AccelSystem(this);
+    MoveSystem(this);
+    CollisionSystem(this);
+    RenderSystem(this);
   }
 }

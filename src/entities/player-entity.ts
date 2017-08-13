@@ -60,10 +60,11 @@ export class PlayerEntity extends BaseEntity {
 
     GrabSystem(this);
     Control2WaySystem(this);
+
+    AccelSystem(this);
+    MoveSystem(this);
+    CollisionSystem(this);
     CameraSystem(this, config);
     RenderSystem(this);
-    CollisionSystem(this);
-    MoveSystem(this);
-    AccelSystem(this);
   }
 }

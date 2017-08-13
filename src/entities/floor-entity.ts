@@ -27,7 +27,7 @@ export class FloorEntity extends BaseEntity {
       fill: "#000000",
     }, config.render));
 
-    RenderSystem(this);
     CollisionSystem(this);
+    RenderSystem(this);
   }
 }
