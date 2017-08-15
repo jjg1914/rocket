@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="60" height="9" tilewidth="16" tileheight="16" nextobjectid="35">
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="60" height="9" tilewidth="16" tileheight="16" nextobjectid="45">
  <layer name="Tile Layer 1" width="60" height="9">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -39,5 +39,21 @@
   <object id="31" name="falling-platform-2" type="falling-platform" x="700" y="80" width="12" height="12"/>
   <object id="33" name="falling-platform-3" type="falling-platform" x="712" y="80" width="12" height="12"/>
   <object id="34" name="falling-platform-4" type="falling-platform" x="724" y="80" width="12" height="12"/>
+  <object id="39" name="phase-platform-1" type="phase-platform" x="800" y="80" width="12" height="12"/>
+  <object id="40" name="phase-platform-2" type="phase-platform" x="864" y="80" width="12" height="12">
+   <properties>
+    <property name="phase.phase" type="int" value="1000"/>
+   </properties>
+  </object>
+  <object id="41" name="phase-platform-3" type="phase-platform" x="800" y="32" width="12" height="12">
+   <properties>
+    <property name="phase.phase" type="int" value="2000"/>
+   </properties>
+  </object>
+  <object id="42" name="phase-platform-4" type="phase-platform" x="864" y="32" width="12" height="12">
+   <properties>
+    <property name="phase.phase" type="int" value="3000"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
