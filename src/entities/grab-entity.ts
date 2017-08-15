@@ -12,12 +12,13 @@ import {
   BaseEntity,
 } from "mu-engine";
 
-import { GrabPickupSystem } from "../systems/grab-pickup-system";
+import { GrabableSystem, GrabableConfig } from "../systems/grabable-system";
 
 export interface GrabConfig {
   position: Partial<PositionData>;
   render: Partial<RenderData>;
   movement: Partial<MovementData>;
+  grabable: Partial<GrabableConfig>;
 }
 
 export class GrabEntity extends BaseEntity {
@@ -35,7 +36,9 @@ export class GrabEntity extends BaseEntity {
     }, config.render));
 
 
-    GrabPickupSystem(this);
+    GrabableSystem(this, Object.assign({
+      mode: "pickup",
+    }, config.grabable));
 
     AccelSystem(this);
     MoveSystem(this);

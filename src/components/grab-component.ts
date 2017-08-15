@@ -1,12 +1,14 @@
 import { CollisionEntity } from "mu-engine";
 
+export type GrabType = "pickup" | "fixed" | "ladder";
+
 export interface GrabData {
-  mode: "pickup" | null;
+  mode: GrabType | null;
   target: CollisionEntity | null;
 }
 
 export class GrabComponent implements GrabData {
-  mode: "pickup" | null;
+  mode: GrabType | null;
   target: CollisionEntity | null;
 
   constructor(options: Partial<GrabData> = {}) {
