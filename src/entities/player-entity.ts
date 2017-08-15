@@ -41,7 +41,7 @@ export class PlayerEntity extends BaseEntity {
     }, config.position));
 
     this.movement = new MovementComponent(Object.assign({
-      restrict: true,
+      restrict: [ 0, null ],
       xMax: 64,
       yMax: 224,
       friction: 128,
