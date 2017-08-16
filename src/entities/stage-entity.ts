@@ -28,7 +28,7 @@ export class StageEntity extends CollectionEntity {
 
     const stage = config.assets.load(config.stage);
     this.put(new PlayerEntity({
-      position: { x: 800, y: 112 },
+      position: { x: 496, y: 80 },
       camera: {
         bounds: stage.bounds(),
         dimensions: { width: 192, height: 144 },

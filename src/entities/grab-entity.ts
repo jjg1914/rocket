@@ -30,7 +30,9 @@ export class GrabEntity extends BaseEntity {
     super();
 
     this.position = new PositionComponent(config.position);
-    this.movement = new MovementComponent(config.movement);
+    this.movement = new MovementComponent(Object.assign({
+      nogravity: _nogravityForMode(config.grabable),
+    }, config.movement));
     this.render = new RenderComponent(Object.assign({
       fill: "#FF0000",
     }, config.render));
@@ -44,5 +46,18 @@ export class GrabEntity extends BaseEntity {
     MoveSystem(this);
     CollisionSystem(this);
     RenderSystem(this);
+  }
+}
+
+function _nogravityForMode(config?: Partial<GrabableConfig>): boolean {
+  if (config != null) {
+    switch (config.mode) {
+    case "fixed":
+      return true;
+    default:
+      return false;
+    }
+  } else {
+    return false;
   }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="60" height="9" tilewidth="16" tileheight="16" nextobjectid="45">
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="60" height="9" tilewidth="16" tileheight="16" nextobjectid="46">
  <layer name="Tile Layer 1" width="60" height="9">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -53,6 +53,11 @@
   <object id="42" name="phase-platform-4" type="phase-platform" x="864" y="32" width="12" height="12">
    <properties>
     <property name="phase.phase" type="int" value="3000"/>
+   </properties>
+  </object>
+  <object id="45" name="grabable-1" type="grab" x="496" y="32" width="16" height="16">
+   <properties>
+    <property name="grabable.mode" value="fixed"/>
    </properties>
   </object>
  </objectgroup>
