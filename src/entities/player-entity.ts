@@ -49,6 +49,7 @@ export class PlayerEntity extends BaseEntity {
 
     this.render = new RenderComponent(Object.assign({
       fill: "#00FF00",
+      depth: 1,
     }, config.render));
 
     this.grab = new GrabComponent(config.grab);

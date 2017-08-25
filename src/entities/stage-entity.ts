@@ -6,6 +6,11 @@ import {
   RenderConfig,
   RenderModule,
   MoveModule,
+  PositionData,
+  PositionComponent,
+  RenderData,
+  RenderComponent,
+  RenderSystem,
   CollisionModule,
   Assets,
 } from "mu-engine";
@@ -23,10 +28,23 @@ export interface StageConfig {
 }
 
 export class StageEntity extends CollectionEntity {
+  position: PositionData;
+  render: RenderData;
+
   constructor(config: StageConfig & InputConfig & RenderConfig) {
     super();
 
     const stage = config.assets.load(config.stage);
+
+    this.position = new PositionComponent({
+      width: stage.bounds().right,
+      height: stage.bounds().bottom,
+    });
+
+    this.render = new RenderComponent({
+      fill: "#FFFFFF",
+    });
+
     this.put(new PlayerEntity({
       position: { x: 496, y: 80 },
       camera: {
@@ -51,5 +69,6 @@ export class StageEntity extends CollectionEntity {
     MoveModule(this, { move: { gravity: 480, bounds: stage.bounds() } });
     CollisionModule(this, { collision: { bounds: stage.bounds() } });
     RenderModule(this, config);
+    RenderSystem(this);
   };
 }
