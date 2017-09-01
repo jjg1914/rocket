@@ -8,14 +8,13 @@ import {
   CollisionSystem,
   MoveSystem,
   Control2WaySystem,
-  CameraConfig,
   AccelSystem,
-  CameraSystem,
   RenderSystem,
   BaseEntity,
 } from "mu-engine";
 
 import { GrabData, GrabComponent } from "../components/grab-component";
+import { StatsData, StatsComponent } from "../components/stats-component";
 import { GrabSystem } from "../systems/grab-system";
 
 export interface PlayerConfig {
@@ -23,6 +22,7 @@ export interface PlayerConfig {
   render: Partial<RenderData>;
   movement: Partial<MovementData>;
   grab: Partial<GrabData>;
+  stats: Partial<StatsData>
 }
 
 export class PlayerEntity extends BaseEntity {
@@ -30,9 +30,10 @@ export class PlayerEntity extends BaseEntity {
   render: RenderData;
   movement: MovementData;
   grab: GrabData;
+  stats: StatsData;
   control: { xAccel: number, jumpSpeed: number, jumpCutoff: number };
 
-  constructor(config: Partial<PlayerConfig> & CameraConfig) {
+  constructor(config: Partial<PlayerConfig>) {
     super();
 
     this.position = new PositionComponent(Object.assign({
@@ -54,6 +55,11 @@ export class PlayerEntity extends BaseEntity {
 
     this.grab = new GrabComponent(config.grab);
 
+    this.stats = new StatsComponent(Object.assign({
+      hitPoints: 5,
+      hitPointsMax: 5,
+    }, config.stats));
+
     this.control = {
       xAccel: 192,
       jumpSpeed: 224,
@@ -66,7 +72,6 @@ export class PlayerEntity extends BaseEntity {
     AccelSystem(this);
     MoveSystem(this);
     CollisionSystem(this);
-    CameraSystem(this, config);
     RenderSystem(this);
   }
 }
