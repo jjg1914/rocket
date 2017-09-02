@@ -16,6 +16,7 @@ import {
 import { GrabData, GrabComponent } from "../components/grab-component";
 import { StatsData, StatsComponent } from "../components/stats-component";
 import { GrabSystem } from "../systems/grab-system";
+import { DieSystem } from "../systems/die-system";
 
 export interface PlayerConfig {
   position: Partial<PositionData>;
@@ -66,6 +67,7 @@ export class PlayerEntity extends BaseEntity {
       jumpCutoff: 100,
     };
 
+    DieSystem(this);
     GrabSystem(this);
     Control2WaySystem(this);
 

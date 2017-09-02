@@ -1,4 +1,10 @@
-import { Assets } from "mu-engine";
+import {
+  Assets,
+  StackEntity,
+  RenderModule,
+  IntervalModule,
+  InputModule,
+} from "mu-engine";
 
 import TestStage from "../assets/test-stage.tmx";
 import * as Path1 from "../assets/path-1.json";
@@ -16,12 +22,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById("stage");
 
   if (canvas != null) {
-    new StageEntity({
-      assets: assets,
-      stage: "test-stage.tmx",
+    const stack = new StackEntity();
+    const stage = _stage(stack);
+    stack.push(stage);
+
+    InputModule(stack, {
       input: {
         canvas: canvas,
-      },
+      }
+    });
+    IntervalModule(stack, { interval: { fps: 60 } });
+    RenderModule(stack, {
       render: {
         canvas: canvas as HTMLCanvasElement,
         width: 192,
@@ -29,7 +40,20 @@ document.addEventListener("DOMContentLoaded", () => {
         smoothing: false,
         scale: 2,
         background: "#FFFFFF",
-      },
+      }
     });
   }
 });
+
+function _stage(stack: StackEntity) {
+  const stage = new StageEntity({
+    assets: assets,
+    stage: "test-stage.tmx",
+  });
+
+  stage.on("exit", () => {
+    stack.swap(_stage(stack));
+  });
+
+  return stage;
+}

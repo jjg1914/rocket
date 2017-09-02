@@ -1,10 +1,5 @@
 import {
   CollectionEntity,
-  IntervalModule,
-  InputConfig,
-  InputModule,
-  RenderConfig,
-  RenderModule,
   MoveModule,
   PositionData,
   PositionComponent,
@@ -34,7 +29,7 @@ export class StageEntity extends CollectionEntity {
   position: PositionData;
   render: RenderData;
 
-  constructor(config: StageConfig & InputConfig & RenderConfig) {
+  constructor(config: StageConfig) {
     super();
 
     const stage = config.assets.load(config.stage);
@@ -52,6 +47,12 @@ export class StageEntity extends CollectionEntity {
       position: { x: 496, y: 80 },
     });
 
+    player.on("die", () => {
+      setTimeout(() => {
+        this.send("exit");
+      }, 3000);
+    })
+
     const hud = new HudEntity();
 
     this.put(player);
@@ -68,11 +69,8 @@ export class StageEntity extends CollectionEntity {
       assets: config.assets,
     });
 
-    InputModule(this, config);
-    IntervalModule(this, { interval: { fps: 60 } });
     MoveModule(this, { move: { gravity: 480, bounds: stage.bounds() } });
     CollisionModule(this, { collision: { bounds: stage.bounds() } });
-    RenderModule(this, config);
     CameraSystem(this, player, {
       camera: {
         bounds: stage.bounds(),

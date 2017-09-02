@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="60" height="9" tilewidth="16" tileheight="16" nextobjectid="46">
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="60" height="9" tilewidth="16" tileheight="16" nextobjectid="47">
  <layer name="Tile Layer 1" width="60" height="9">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -34,7 +34,7 @@
   <object id="25" name="ramp-2" type="floor" x="576" y="128">
    <polygon points="0,0 0,-32 64,0"/>
   </object>
-  <object id="26" name="floor-3" type="floor" x="640" y="128" width="320" height="16"/>
+  <object id="26" name="floor-3" type="floor" x="752" y="128" width="208" height="16"/>
   <object id="27" name="falling-platform-1" type="falling-platform" x="688" y="80" width="12" height="12"/>
   <object id="31" name="falling-platform-2" type="falling-platform" x="700" y="80" width="12" height="12"/>
   <object id="33" name="falling-platform-3" type="falling-platform" x="712" y="80" width="12" height="12"/>
@@ -60,5 +60,6 @@
     <property name="grabable.mode" value="fixed"/>
    </properties>
   </object>
+  <object id="46" name="floor-4" type="floor" x="640" y="128" width="32" height="16"/>
  </objectgroup>
 </map>
