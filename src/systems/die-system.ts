@@ -3,6 +3,7 @@ import {
   MovementData,
   PositionData,
   InputEventData,
+  CollisionEventData,
 } from "mu-engine";
 
 import { DieEvent } from "../events/die-event";
@@ -22,9 +23,17 @@ export function DieSystem(entity: DieEntity): void {
   });
 
   entity.on("die", () => {
-    entity.position.ignoreSolid = true;
-    entity.movement.ySpeed = -160;
-    _die = true;
+    if (!_die) {
+      entity.position.ignoreSolid = true;
+      entity.movement.ySpeed = -160;
+      _die = true;
+    }
+  });
+
+  entity.on("outofbounds", (ev: CollisionEventData) => {
+    if (entity.position.y > ev.data.bounds().bottom) {
+      entity.send("die", new DieEvent());
+    }
   });
 
   entity.before("keydown", () => _die);
