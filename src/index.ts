@@ -23,8 +23,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (canvas != null) {
     const stack = new StackEntity();
-    const stage = _stage(stack);
-    stack.push(stage);
+    stack.push(new StageEntity({
+      assets: assets,
+      stage: "test-stage.tmx",
+    }));
 
     InputModule(stack, {
       input: {
@@ -44,16 +46,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
-
-function _stage(stack: StackEntity) {
-  const stage = new StageEntity({
-    assets: assets,
-    stage: "test-stage.tmx",
-  });
-
-  stage.on("exit", () => {
-    stack.swap(_stage(stack));
-  });
-
-  return stage;
-}
