@@ -36,8 +36,8 @@ export class StageEntity extends CollectionEntity {
     const stage = config.assets.load(config.stage);
 
     this.position = new PositionComponent({
-      width: stage.bounds().right,
-      height: stage.bounds().bottom,
+      width: stage.bounds().right + 1,
+      height: stage.bounds().bottom + 1,
     });
 
     this.render = new RenderComponent({
