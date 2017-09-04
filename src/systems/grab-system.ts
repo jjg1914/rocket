@@ -24,7 +24,17 @@ export function GrabSystem(entity: GrabEntity): void {
           entity.grab.mode = null;
           break;
         case "fixed":
-          entity.movement.xAccel = 0;
+          const _left = event.inputs["ArrowLeft"] || event.inputs["A"];
+          const _right = event.inputs["ArrowRight"] || event.inputs["D"];
+
+          if (_left && !_right) {
+            entity.movement.xAccel = -entity.control.xAccel;
+          } else if (_right && !_left) {
+            entity.movement.xAccel = entity.control.xAccel;
+          } else {
+            entity.movement.xAccel = 0;
+          }
+
           entity.movement.xSpeed = 0;
           entity.movement.yAccel = 0;
           entity.movement.ySpeed = 0;
@@ -39,6 +49,19 @@ export function GrabSystem(entity: GrabEntity): void {
       if (entity.grab.target != null) {
         switch (entity.grab.mode) {
         case "fixed":
+          const _left = event.inputs["ArrowLeft"] || event.inputs["A"];
+          const _right = event.inputs["ArrowRight"] || event.inputs["D"];
+
+          if (entity.movement.xMax != null) {
+            if (_left && !_right) {
+              entity.movement.xAccel = -entity.control.xAccel;
+              entity.movement.xSpeed = -entity.movement.xMax;
+            } else if (_right && !_left) {
+              entity.movement.xAccel = entity.control.xAccel;
+              entity.movement.xSpeed = entity.movement.xMax;
+            }
+          }
+
           entity.movement.nogravity = false;
           entity.position.landing = entity.grab.target;
           entity.grab.target = null;

@@ -4,6 +4,9 @@ import { GrabData } from "../components/grab-component";
 export type GrabEventType = "grab";
 
 export interface GrabEntity extends Entity {
+  control: {
+    xAccel: number,
+  },
   position: PositionData;
   grab: GrabData;
   movement: MovementData;
