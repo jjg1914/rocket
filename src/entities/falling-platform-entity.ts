@@ -32,6 +32,7 @@ export class FallingPlatformEntity extends BaseEntity {
       solid: [ null, 1 ],
     }, config.position));
     this.movement = new MovementComponent(Object.assign({
+      friction: 128,
       nogravity: true,
     }, config.movement));
     this.render = new RenderComponent(Object.assign({

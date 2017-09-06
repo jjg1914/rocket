@@ -3,6 +3,8 @@ import {
   PositionComponent,
   RenderData,
   RenderComponent,
+  MovementData,
+  MovementComponent,
   CollisionSystem,
   RenderSystem,
   BaseEntity,
@@ -11,11 +13,13 @@ import {
 export interface FloorConfig {
   position: Partial<PositionData>;
   render: Partial<RenderData>;
+  movement: Partial<MovementData>;
 }
 
 export class FloorEntity extends BaseEntity {
   position: PositionData;
   render: RenderData;
+  movement: MovementData;
 
   constructor(config: Partial<FloorConfig>) {
     super();
@@ -26,6 +30,9 @@ export class FloorEntity extends BaseEntity {
     this.render = new RenderComponent(Object.assign({
       fill: "#000000",
     }, config.render));
+    this.movement = new MovementComponent(Object.assign({
+      friction: 128,
+    }, config.movement));
 
     CollisionSystem(this);
     RenderSystem(this);

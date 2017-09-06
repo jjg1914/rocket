@@ -32,6 +32,7 @@ export class GrabEntity extends BaseEntity {
     this.position = new PositionComponent(config.position);
     this.movement = new MovementComponent(Object.assign({
       nogravity: _nogravityForMode(config.grabable),
+      drag: 96,
     }, config.movement));
     this.render = new RenderComponent(Object.assign({
       fill: "#FF0000",

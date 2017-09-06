@@ -46,7 +46,7 @@ export class PlayerEntity extends BaseEntity {
       restrict: [ 0, null ],
       xMax: 64,
       yMax: 224,
-      friction: 128,
+      drag: 96,
     }, config.movement));
 
     this.render = new RenderComponent(Object.assign({

@@ -32,7 +32,9 @@ export class PlatformEntity extends BaseEntity {
     this.position = new PositionComponent(Object.assign({
       solid: [ null, 1 ],
     }, config.position));
-    this.movement = new MovementComponent(config.movement);
+    this.movement = new MovementComponent(Object.assign({
+      friction: 128,
+    }, config.movement));
     this.path = new PathComponent(Object.assign({
       repeat: true,
     }, config.path));
