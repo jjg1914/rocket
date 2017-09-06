@@ -20,6 +20,11 @@ export function GrabSystem(entity: GrabEntity): void {
         switch (entity.grab.mode) {
         case "pickup":
           entity.grab.target.position.ignoreSolid = false;
+          entity.grab.target.position.landing = null;
+          if (entity.grab.target.movement != null) {
+            entity.grab.target.movement.xSpeed = 2.33 * entity.movement.xSpeed;
+            entity.grab.target.movement.ySpeed = -96;
+          }
           entity.grab.target = null;
           entity.grab.mode = null;
           break;
