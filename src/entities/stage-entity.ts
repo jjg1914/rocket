@@ -9,7 +9,7 @@ import {
   CameraSystem,
   CollisionModule,
   Assets,
-  EntityAddEvent,
+  EntityDestroyEvent,
 } from "mu-engine";
 
 import { PlayerEntity } from "../entities/player-entity";
@@ -50,7 +50,7 @@ export class StageEntity extends CollectionEntity {
 
     player.on("die", () => {
       setTimeout(() => {
-        this.send("swap", new EntityAddEvent("swap", new StageEntity(config)));
+        this.send("pop", new EntityDestroyEvent("pop"));
       }, 3000);
     })
 

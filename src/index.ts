@@ -16,16 +16,15 @@ const assets = new Assets({
   "path-2.json": { type: "path", data: Path2 },
 });
 
-import { StageEntity } from "./entities/stage-entity";
+import { StageMenuEntity } from "./entities/stage-menu-entity";
 
 document.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById("stage");
 
   if (canvas != null) {
     const stack = new StackEntity();
-    stack.push(new StageEntity({
+    stack.push(new StageMenuEntity({
       assets: assets,
-      stage: "test-stage.tmx",
     }));
 
     InputModule(stack, {
