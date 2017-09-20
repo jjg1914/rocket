@@ -45,7 +45,7 @@ export class StageEntity extends CollectionEntity {
     });
 
     const player = new PlayerEntity({
-      position: { x: 496, y: 80 },
+      position: { x: 48, y: 400 },
     });
 
     player.on("die", () => {

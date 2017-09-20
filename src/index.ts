@@ -7,11 +7,13 @@ import {
 } from "mu-engine";
 
 import TestStage from "../assets/test-stage.tmx";
+import Stage1 from "../assets/stage1.tmx";
 import * as Path1 from "../assets/path-1.json";
 import * as Path2 from "../assets/path-2.json";
 
 const assets = new Assets({
   "test-stage.tmx": { type: "stage", data: TestStage },
+  "stage1.tmx": { type: "stage", data: Stage1 },
   "path-1.json": { type: "path", data: Path1 },
   "path-2.json": { type: "path", data: Path2 },
 });
