@@ -27,9 +27,7 @@ export class FloorEntity extends BaseEntity {
     this.position = new PositionComponent(Object.assign({
       solid: true,
     }, config.position));
-    this.render = new RenderComponent(Object.assign({
-      fill: "#000000",
-    }, config.render));
+    this.render = new RenderComponent(config.render);
     this.movement = new MovementComponent(Object.assign({
       friction: 128,
     }, config.movement));

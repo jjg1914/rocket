@@ -38,9 +38,7 @@ export class PlatformEntity extends BaseEntity {
     this.path = new PathComponent(Object.assign({
       repeat: true,
     }, config.path));
-    this.render = new RenderComponent(Object.assign({
-      fill: "#0000FF",
-    }, config.render));
+    this.render = new RenderComponent(config.render);
 
     PathSystem(this);
     CollisionSystem(this);

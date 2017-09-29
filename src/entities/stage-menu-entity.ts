@@ -7,6 +7,7 @@ import {
   Transform,
   Circle,
   InputEventData,
+  EntityDefinition,
   EntityAddEvent,
   identity,
   translate,
@@ -16,6 +17,7 @@ import { StageEntity } from "./stage-entity";
 
 export interface StageMenuConfig {
   assets: Assets;
+  entities: { [ key: string ]: EntityDefinition }
 }
 
 export class StageMenuEntity extends BaseEntity {
@@ -76,6 +78,7 @@ constructor(config: StageMenuConfig) {
         this.send("push", new EntityAddEvent("push", new StageEntity({
           assets: config.assets,
           stage: config.assets.stages()[position],
+          entities: config.entities,
         }), { block: true }));
         break;
       case "ArrowDown":

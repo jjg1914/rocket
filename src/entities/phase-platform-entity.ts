@@ -36,9 +36,7 @@ export class PhasePlatformEntity extends BaseEntity {
       nogravity: true,
       friction: 128,
     }, config.movement));
-    this.render = new RenderComponent(Object.assign({
-      fill: "#0000FF",
-    }, config.render));
+    this.render = new RenderComponent( config.render);
 
     AccelSystem(this);
     MoveSystem(this);
