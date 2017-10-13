@@ -26,6 +26,9 @@ export function DieSystem(entity: DieEntity): void {
     if (!_die) {
       entity.position.ignoreSolid = true;
       entity.movement.ySpeed = -160;
+      entity.movement.yAccel= 0;
+      entity.movement.xSpeed = 0;
+      entity.movement.xAccel= 0;
       _die = true;
     }
   });

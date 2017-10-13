@@ -8,6 +8,7 @@ import {
 
 import TestStage from "../assets/test-stage.tmx";
 import * as Tileset from "../assets/tileset.json";
+import * as Spikes from "../assets/spikes.json";
 import Stage1 from "../assets/stage1.tmx";
 import * as Path1 from "../assets/path-1.json";
 import * as Path2 from "../assets/path-2.json";
@@ -15,6 +16,7 @@ import * as Path2 from "../assets/path-2.json";
 const assets = new Assets({
   "test-stage.tmx": { type: "stage", data: TestStage },
   "tileset.json": { type: "tileset", data: Tileset },
+  "spikes.json": { type: "sprite", data: Spikes },
   "stage1.tmx": { type: "stage", data: Stage1 },
   "path-1.json": { type: "path", data: Path1 },
   "path-2.json": { type: "path", data: Path2 },
@@ -25,6 +27,7 @@ import { FloorEntity } from "./entities/floor-entity";
 import { PlatformEntity } from "./entities/platform-entity";
 import { FallingPlatformEntity } from "./entities/falling-platform-entity";
 import { PhasePlatformEntity } from "./entities/phase-platform-entity";
+import { SpikesEntity } from "./entities/spikes-entity";
 
 import { StageMenuEntity } from "./entities/stage-menu-entity";
 
@@ -42,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "falling-platform": FallingPlatformEntity,
         "phase-platform": PhasePlatformEntity,
         grab: GrabEntity,
+        spikes: SpikesEntity,
       },
     }));
 
@@ -54,6 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
     RenderModule(stack, {
       render: {
         canvas: canvas as HTMLCanvasElement,
+        assets: assets,
         width: 192,
         height: 144,
         smoothing: false,
