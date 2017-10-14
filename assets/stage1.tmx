@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="100" height="27" tilewidth="16" tileheight="16" nextobjectid="34">
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="100" height="27" tilewidth="16" tileheight="16" nextobjectid="35">
  <tileset firstgid="1" source="tileset.json"/>
  <layer name="Tile Layer 1" width="100" height="27">
   <data encoding="csv">
@@ -63,5 +63,10 @@
   <object id="25" name="floor-4" type="floor" x="800" y="320" width="112" height="16"/>
   <object id="31" name="spikes-1" type="spikes" x="496" y="368" width="16" height="16"/>
   <object id="32" name="spikes-2" type="spikes" x="512" y="368" width="16" height="16"/>
+  <object id="34" name="grabable-1" type="grab" x="160" y="320" width="16" height="96">
+   <properties>
+    <property name="grabable.mode" value="ladder"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
