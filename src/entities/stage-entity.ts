@@ -19,7 +19,7 @@ export class StageEntity extends BaseStageEntity {
     super(config);
 
     const player = new PlayerEntity({
-      position: { x: 48, y: 400 },
+      position: this.stage.prop("player"),
     });
 
     player.on("die", () => {
