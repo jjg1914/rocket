@@ -3,6 +3,7 @@ import {
   InputEventData,
   ResolutionEventData,
   CollisionEntity,
+  Collision,
 } from "mu-engine";
 
 import { GrabEntity, GrabEvent } from "../events/grab-event";
@@ -29,6 +30,7 @@ export function GrabSystem(entity: GrabEntity): void {
           entity.grab.mode = null;
           break;
         case "fixed":
+        case "ladder":
           const _left = event.inputs["ArrowLeft"] || event.inputs["A"];
           const _right = event.inputs["ArrowRight"] || event.inputs["D"];
 
@@ -44,6 +46,7 @@ export function GrabSystem(entity: GrabEntity): void {
           entity.movement.yAccel = 0;
           entity.movement.ySpeed = 0;
           entity.movement.nogravity = false;
+          entity.movement.nofriction = false;
           entity.grab.target = null;
           entity.grab.mode = null;
           break;
@@ -72,6 +75,13 @@ export function GrabSystem(entity: GrabEntity): void {
           entity.grab.target = null;
           entity.grab.mode = null;
           break;
+        case "ladder":
+          entity.movement.nofriction = false;
+          entity.movement.nogravity = false;
+          entity.position.landing = entity.grab.target;
+          entity.grab.target = null;
+          entity.grab.mode = null;
+          break;
         }
       }
       break;
@@ -80,8 +90,31 @@ export function GrabSystem(entity: GrabEntity): void {
     case "A":
     case "D":
       if (entity.grab.target != null) {
+        const _left = event.inputs["ArrowLeft"] || event.inputs["A"];
+        const _right = event.inputs["ArrowRight"] || event.inputs["D"];
+
         switch (entity.grab.mode) {
         case "fixed":
+          return true;
+        case "ladder":
+          entity.movement.xSpeed = _ladder(entity.movement.xMax, 0.75, _left, _right);
+
+          return true;
+        }
+      }
+      break;
+    case "ArrowUp":
+    case "W":
+    case "ArrowDown":
+    case "S":
+      if (entity.grab.target != null) {
+        const _up = event.inputs["ArrowUp"] || event.inputs["W"];
+        const _down = event.inputs["ArrowDown"] || event.inputs["S"];
+
+        switch (entity.grab.mode) {
+        case "ladder":
+          entity.movement.ySpeed = _ladder(entity.movement.xMax, 1, _up, _down);
+
           return true;
         }
       }
@@ -96,8 +129,29 @@ export function GrabSystem(entity: GrabEntity): void {
     case "A":
     case "D":
       if (entity.grab.target != null) {
+        const _left = event.inputs["ArrowLeft"] || event.inputs["A"];
+        const _right = event.inputs["ArrowRight"] || event.inputs["D"];
+
         switch (entity.grab.mode) {
         case "fixed":
+          return true;
+        case "ladder":
+          entity.movement.xSpeed = _ladder(entity.movement.xMax, 0.75, _left, _right);
+        }
+      }
+      break;
+    case "ArrowUp":
+    case "W":
+    case "ArrowDown":
+    case "S":
+      if (entity.grab.target != null) {
+        const _up = event.inputs["ArrowUp"] || event.inputs["W"];
+        const _down = event.inputs["ArrowDown"] || event.inputs["S"];
+
+        switch (entity.grab.mode) {
+        case "ladder":
+          entity.movement.ySpeed = _ladder(entity.movement.xMax, 1, _up, _down);
+
           return true;
         }
       }
@@ -112,8 +166,6 @@ export function GrabSystem(entity: GrabEntity): void {
   });
 
   entity.on("postcollision", () => {
-    _grab = false;
-
     for (let e of _collisions) {
       if (e.send("grab", new GrabEvent(entity))) {
         break;
@@ -143,10 +195,50 @@ export function GrabSystem(entity: GrabEntity): void {
         entity.movement.nogravity = true;
 
         break;
+      case "ladder":
+        if (Collision.check(entity, entity.grab.target)) {
+          entity.movement.nogravity = true;
+          entity.movement.nofriction = true;
+
+          if (_grab) {
+            entity.movement.xSpeed = 0;
+            entity.movement.ySpeed = 0;
+          }
+        } else {
+          entity.movement.yAccel = 0;
+          entity.movement.ySpeed = 0;
+          entity.movement.nogravity = false;
+          entity.movement.nofriction = false;
+          entity.grab.target = null;
+          entity.grab.mode = null;
+        }
+        
+        break;
       default:
         break;
       }
-
     }
+
+    _grab = false;
   });
+}
+
+function _ladder(max: number | null,
+                adjust: number,
+                left?: boolean | null,
+                right?: boolean | null)
+: number {
+  let rval = 0;
+
+  if (max != null) {
+    if (left) {
+      rval -= max * adjust;
+    }
+
+    if (right) {
+      rval += max * adjust;
+    }
+  }
+
+  return rval;
 }
