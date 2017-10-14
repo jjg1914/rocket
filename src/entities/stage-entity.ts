@@ -8,8 +8,8 @@ import {
 } from "mu-engine";
 
 import { PlayerEntity } from "../entities/player-entity";
-import { HudEntity } from "../entities/hud-entity";
-import { HudSystem } from "../systems/hud-system";
+// import { HudEntity } from "../entities/hud-entity";
+// import { HudSystem } from "../systems/hud-system";
 
 export class StageEntity extends BaseStageEntity {
   position: PositionData;
@@ -28,10 +28,10 @@ export class StageEntity extends BaseStageEntity {
       }, 3000);
     })
 
-    const hud = new HudEntity();
+    // const hud = new HudEntity();
 
     this.put(player);
-    this.put(hud);
+    // this.put(hud);
 
     CameraSystem(this, player, {
       camera: {
@@ -39,6 +39,6 @@ export class StageEntity extends BaseStageEntity {
         dimensions: { width: 192, height: 144 },
       }
     });
-    HudSystem(this, hud, player);
+    // HudSystem(this, hud, player);
   };
 }
