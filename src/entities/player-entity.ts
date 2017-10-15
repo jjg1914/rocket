@@ -5,11 +5,14 @@ import {
   MovementComponent,
   RenderData,
   RenderComponent,
+  AnimationData,
+  AnimationComponent,
   CollisionSystem,
   MoveSystem,
   Control2WaySystem,
   AccelSystem,
   RenderSystem,
+  AnimationSystem,
   BaseEntity,
 } from "mu-engine";
 
@@ -21,6 +24,7 @@ import { DieSystem } from "../systems/die-system";
 export interface PlayerConfig {
   position: Partial<PositionData>;
   render: Partial<RenderData>;
+  animation: Partial<AnimationData>;
   movement: Partial<MovementData>;
   grab: Partial<GrabData>;
   stats: Partial<StatsData>
@@ -29,6 +33,7 @@ export interface PlayerConfig {
 export class PlayerEntity extends BaseEntity {
   position: PositionData;
   render: RenderData;
+  animation: AnimationData;
   movement: MovementData;
   grab: GrabData;
   stats: StatsData;
@@ -50,8 +55,13 @@ export class PlayerEntity extends BaseEntity {
     }, config.movement));
 
     this.render = new RenderComponent(Object.assign({
-      fill: "#00FF00",
+      sprite: "player.json",
+      spriteFrame: 0,
       depth: 1,
+    }, config.render));
+
+    this.animation = new AnimationComponent(Object.assign({
+      tag: "stand-right",
     }, config.render));
 
     this.grab = new GrabComponent(config.grab);
@@ -67,6 +77,22 @@ export class PlayerEntity extends BaseEntity {
       jumpCutoff: 100,
     };
 
+    this.on("start-right", () => {
+      this.animation.tag = "walk-right";
+    });
+
+    this.on("start-left", () => {
+      this.animation.tag = "walk-left";
+    });
+
+    this.on("stop-right", () => {
+      this.animation.tag = "stand-right";
+    });
+
+    this.on("stop-left", () => {
+      this.animation.tag = "stand-left";
+    });
+
     DieSystem(this);
     GrabSystem(this);
     Control2WaySystem(this);
@@ -74,6 +100,7 @@ export class PlayerEntity extends BaseEntity {
     AccelSystem(this);
     MoveSystem(this);
     CollisionSystem(this);
+    AnimationSystem(this);
     RenderSystem(this);
   }
 }

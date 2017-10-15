@@ -10,18 +10,23 @@ import TestStage from "../assets/test-stage.tmx";
 import * as Tileset from "../assets/tileset.json";
 import * as Spikes from "../assets/spikes.json";
 import * as Block from "../assets/block.json";
+import * as Player from "../assets/player.json";
 import Stage1 from "../assets/stage1.tmx";
 import * as Path1 from "../assets/path-1.json";
 import * as Path2 from "../assets/path-2.json";
 
 const assets = new Assets({
-  "test-stage.tmx": { type: "stage", data: TestStage },
-  "tileset.json": { type: "tileset", data: Tileset },
-  "spikes.json": { type: "sprite", data: Spikes },
-  "block.json": { type: "sprite", data: Block },
-  "stage1.tmx": { type: "stage", data: Stage1 },
-  "path-1.json": { type: "path", data: Path1 },
-  "path-2.json": { type: "path", data: Path2 },
+  preload: true,
+  assets: {
+    "test-stage.tmx": { type: "stage", data: TestStage },
+    "tileset.json": { type: "tileset", data: Tileset },
+    "spikes.json": { type: "sprite", data: Spikes },
+    "block.json": { type: "sprite", data: Block },
+    "player.json": { type: "sprite", data: Player },
+    "stage1.tmx": { type: "stage", data: Stage1 },
+    "path-1.json": { type: "path", data: Path1 },
+    "path-2.json": { type: "path", data: Path2 },
+  }
 });
 
 import { GrabEntity } from "./entities/grab-entity";
