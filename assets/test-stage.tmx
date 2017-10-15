@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="60" height="9" tilewidth="16" tileheight="16" nextobjectid="47">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="60" height="9" tilewidth="16" tileheight="16" nextobjectid="47">
+ <properties>
+  <property name="player" value="{ &quot;x&quot;: 32, &quot;y&quot;: 112 }"/>
+ </properties>
  <layer name="Tile Layer 1" width="60" height="9">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -19,16 +22,26 @@
     <property name="render.fill" type="color" value="#ff000000"/>
    </properties>
   </object>
-  <object id="7" name="nub" type="floor" x="192" y="112" width="16" height="16"/>
-  <object id="9" name="grabable-1" type="grab" x="192" y="96" width="16" height="16"/>
+  <object id="7" name="nub" type="floor" x="192" y="112" width="16" height="16">
+   <properties>
+    <property name="render.fill" type="color" value="#ff000000"/>
+   </properties>
+  </object>
+  <object id="9" name="grabable-1" type="grab" x="192" y="96" width="16" height="16">
+   <properties>
+    <property name="render.fill" type="color" value="#ffff0000"/>
+   </properties>
+  </object>
   <object id="10" name="platform-1" type="platform" x="72" y="24" width="24" height="8">
    <properties>
     <property name="path.path" type="file" value="path-1.json"/>
+    <property name="render.fill" type="color" value="#ff0000ff"/>
    </properties>
   </object>
   <object id="11" name="platform-2" type="platform" x="264" y="68" width="24" height="8">
    <properties>
     <property name="path.path" type="file" value="path-2.json"/>
+    <property name="render.fill" type="color" value="#ff0000ff"/>
    </properties>
   </object>
   <object id="21" name="floor-2" type="floor" x="432" y="96" width="144" height="16">
@@ -53,29 +66,53 @@
     <property name="render.fill" type="color" value="#ff000000"/>
    </properties>
   </object>
-  <object id="27" name="falling-platform-1" type="falling-platform" x="688" y="80" width="12" height="12"/>
-  <object id="31" name="falling-platform-2" type="falling-platform" x="700" y="80" width="12" height="12"/>
-  <object id="33" name="falling-platform-3" type="falling-platform" x="712" y="80" width="12" height="12"/>
-  <object id="34" name="falling-platform-4" type="falling-platform" x="724" y="80" width="12" height="12"/>
-  <object id="39" name="phase-platform-1" type="phase-platform" x="800" y="80" width="12" height="12"/>
+  <object id="27" name="falling-platform-1" type="falling-platform" x="688" y="80" width="12" height="12">
+   <properties>
+    <property name="render.fill" type="color" value="#ff0000ff"/>
+   </properties>
+  </object>
+  <object id="31" name="falling-platform-2" type="falling-platform" x="700" y="80" width="12" height="12">
+   <properties>
+    <property name="render.fill" type="color" value="#ff0000ff"/>
+   </properties>
+  </object>
+  <object id="33" name="falling-platform-3" type="falling-platform" x="712" y="80" width="12" height="12">
+   <properties>
+    <property name="render.fill" type="color" value="#ff0000ff"/>
+   </properties>
+  </object>
+  <object id="34" name="falling-platform-4" type="falling-platform" x="724" y="80" width="12" height="12">
+   <properties>
+    <property name="render.fill" type="color" value="#ff0000ff"/>
+   </properties>
+  </object>
+  <object id="39" name="phase-platform-1" type="phase-platform" x="800" y="80" width="12" height="12">
+   <properties>
+    <property name="render.fill" type="color" value="#ff0000ff"/>
+   </properties>
+  </object>
   <object id="40" name="phase-platform-2" type="phase-platform" x="864" y="80" width="12" height="12">
    <properties>
     <property name="phase.phase" type="int" value="1000"/>
+    <property name="render.fill" type="color" value="#ff0000ff"/>
    </properties>
   </object>
   <object id="41" name="phase-platform-3" type="phase-platform" x="800" y="32" width="12" height="12">
    <properties>
     <property name="phase.phase" type="int" value="2000"/>
+    <property name="render.fill" type="color" value="#ff0000ff"/>
    </properties>
   </object>
   <object id="42" name="phase-platform-4" type="phase-platform" x="864" y="32" width="12" height="12">
    <properties>
     <property name="phase.phase" type="int" value="3000"/>
+    <property name="render.fill" type="color" value="#ff0000ff"/>
    </properties>
   </object>
   <object id="45" name="grabable-1" type="grab" x="496" y="32" width="16" height="16">
    <properties>
     <property name="grabable.mode" value="fixed"/>
+    <property name="render.fill" type="color" value="#ffff0000"/>
    </properties>
   </object>
   <object id="46" name="floor-4" type="floor" x="640" y="128" width="32" height="16">
