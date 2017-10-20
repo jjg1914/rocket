@@ -7,6 +7,10 @@ import {
   RenderComponent,
   AnimationData,
   AnimationComponent,
+  AccelData,
+  AccelComponent,
+  CollisionData,
+  CollisionComponent,
   CollisionSystem,
   MoveSystem,
   Control2WaySystem,
@@ -26,6 +30,8 @@ export interface PlayerConfig {
   render: Partial<RenderData>;
   animation: Partial<AnimationData>;
   movement: Partial<MovementData>;
+  collision: Partial<CollisionData>;
+  accel: Partial<AccelData>;
   grab: Partial<GrabData>;
   stats: Partial<StatsData>
 }
@@ -37,24 +43,32 @@ export class PlayerEntity extends BaseEntity {
   movement: MovementData;
   grab: GrabData;
   stats: StatsData;
+  collision: CollisionData;
+  accel: AccelData;
   control: { xAccel: number, jumpSpeed: number, jumpCutoff: number };
 
   constructor(config: Partial<PlayerConfig>) {
     super();
 
     this.position = new PositionComponent(Object.assign({
-      width: 16,
-      height: 16,
+      width: 12,
+      height: 14,
     }, config.position));
+
+    this.accel= new AccelComponent(Object.assign({
+      drag: 96,
+    }, config.accel));
 
     this.movement = new MovementComponent(Object.assign({
       restrict: [ 0, null ],
       xMax: 64,
       yMax: 224,
-      drag: 96,
     }, config.movement));
 
+    this.collision = new CollisionComponent(config.collision);
+
     this.render = new RenderComponent(Object.assign({
+      transform: [ 1, 0, -2, 0, 1, -2 ],
       sprite: "player.json",
       spriteFrame: 0,
       depth: 1,

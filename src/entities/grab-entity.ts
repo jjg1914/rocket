@@ -5,6 +5,10 @@ import {
   MovementComponent,
   RenderData,
   RenderComponent,
+  AccelData,
+  AccelComponent,
+  CollisionData,
+  CollisionComponent,
   CollisionSystem,
   MoveSystem,
   AccelSystem,
@@ -19,25 +23,34 @@ export interface GrabConfig {
   render: Partial<RenderData>;
   movement: Partial<MovementData>;
   grabable: Partial<GrabableConfig>;
+  collision: Partial<CollisionData>;
+  accel: Partial<AccelData>;
 }
 
 export class GrabEntity extends BaseEntity {
   position: PositionData;
   render: RenderData;
   movement: MovementData;
+  collision: CollisionData;
+  accel: AccelData;
 
   constructor(config: Partial<GrabConfig>) {
     super();
 
     this.position = new PositionComponent(config.position);
-    this.movement = new MovementComponent(Object.assign({
+
+    this.accel= new AccelComponent(Object.assign({
       nogravity: _nogravityForMode(config.grabable),
       drag: 96,
-    }, config.movement));
+    }, config.accel));
+
+    this.movement = new MovementComponent(config.movement);
+
+    this.collision = new CollisionComponent(config.collision);
+
     this.render = new RenderComponent(Object.assign({
       fill: "#FF0000",
     }, config.render));
-
 
     GrabableSystem(this, Object.assign({
       mode: "pickup",

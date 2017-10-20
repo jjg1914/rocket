@@ -15,8 +15,12 @@ export interface HudTargetEntity {
 
 export function HudSystem(entity: Entity, hud: HudEntity, target: HudTargetEntity) {
   entity.after("prerender", (ev: RenderEventData) => {
-    identity(hud.render.transform);
-    scale(hud.render.transform, Math.floor(32 * (target.stats.hitPoints / target.stats.hitPointsMax)), 8);
-    translate(hud.render.transform, ev.viewport.left + 4, ev.viewport.top + 2);
+    const transform = hud.render.transform;
+
+    if (transform != undefined) {
+      identity(transform);
+      scale(transform, Math.floor(32 * (target.stats.hitPoints / target.stats.hitPointsMax)), 8);
+      translate(transform, ev.viewport.left + 4, ev.viewport.top + 2);
+    }
   });
 }

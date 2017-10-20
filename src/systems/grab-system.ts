@@ -20,8 +20,8 @@ export function GrabSystem(entity: GrabEntity): void {
       } else {
         switch (entity.grab.mode) {
         case "pickup":
-          entity.grab.target.position.ignoreSolid = false;
-          entity.grab.target.position.landing = null;
+          entity.grab.target.collision.ignoreSolid = false;
+          entity.grab.target.collision.landing = undefined;
           if (entity.grab.target.movement != null) {
             entity.grab.target.movement.xSpeed = 2.33 * entity.movement.xSpeed;
             entity.grab.target.movement.ySpeed = -96;
@@ -35,18 +35,18 @@ export function GrabSystem(entity: GrabEntity): void {
           const _right = event.inputs["ArrowRight"] || event.inputs["D"];
 
           if (_left && !_right) {
-            entity.movement.xAccel = -entity.control.xAccel;
+            entity.accel.xAccel = -entity.control.xAccel;
           } else if (_right && !_left) {
-            entity.movement.xAccel = entity.control.xAccel;
+            entity.accel.xAccel = entity.control.xAccel;
           } else {
-            entity.movement.xAccel = 0;
+            entity.accel.xAccel = 0;
           }
 
           entity.movement.xSpeed = 0;
-          entity.movement.yAccel = 0;
+          entity.accel.yAccel = 0;
           entity.movement.ySpeed = 0;
-          entity.movement.nogravity = false;
-          entity.movement.nofriction = false;
+          entity.accel.nogravity = false;
+          entity.accel.nofriction = false;
           entity.grab.target = null;
           entity.grab.mode = null;
           break;
@@ -62,23 +62,23 @@ export function GrabSystem(entity: GrabEntity): void {
 
           if (entity.movement.xMax != null) {
             if (_left && !_right) {
-              entity.movement.xAccel = -entity.control.xAccel;
+              entity.accel.xAccel = -entity.control.xAccel;
               entity.movement.xSpeed = -entity.movement.xMax;
             } else if (_right && !_left) {
-              entity.movement.xAccel = entity.control.xAccel;
+              entity.accel.xAccel = entity.control.xAccel;
               entity.movement.xSpeed = entity.movement.xMax;
             }
           }
 
-          entity.movement.nogravity = false;
-          entity.position.landing = entity.grab.target;
+          entity.accel.nogravity = false;
+          entity.collision.landing = entity.grab.target;
           entity.grab.target = null;
           entity.grab.mode = null;
           break;
         case "ladder":
-          entity.movement.nofriction = false;
-          entity.movement.nogravity = false;
-          entity.position.landing = entity.grab.target;
+          entity.accel.nofriction = false;
+          entity.accel.nogravity = false;
+          entity.collision.landing = entity.grab.target;
           entity.grab.target = null;
           entity.grab.mode = null;
           break;
@@ -182,8 +182,8 @@ export function GrabSystem(entity: GrabEntity): void {
       case "pickup":
         entity.grab.target.position.x = ((b.right + b.left) / 2) - ((c.right - c.left) / 2);
         entity.grab.target.position.y = b.top - (c.bottom - c.top + 1);
-        entity.grab.target.position.ignoreSolid = true;
-        entity.grab.target.position.landing = null;
+        entity.grab.target.collision.ignoreSolid = true;
+        entity.grab.target.collision.landing = undefined;
         if (entity.grab.target.movement != null) {
           entity.grab.target.movement.ySpeed = 0;
         }
@@ -192,23 +192,23 @@ export function GrabSystem(entity: GrabEntity): void {
       case "fixed":
         entity.position.x = c.left;
         entity.position.y = c.top;
-        entity.movement.nogravity = true;
+        entity.accel.nogravity = true;
 
         break;
       case "ladder":
         if (Collision.check(entity, entity.grab.target)) {
-          entity.movement.nogravity = true;
-          entity.movement.nofriction = true;
+          entity.accel.nogravity = true;
+          entity.accel.nofriction = true;
 
           if (_grab) {
             entity.movement.xSpeed = 0;
             entity.movement.ySpeed = 0;
           }
         } else {
-          entity.movement.yAccel = 0;
+          entity.accel.yAccel = 0;
           entity.movement.ySpeed = 0;
-          entity.movement.nogravity = false;
-          entity.movement.nofriction = false;
+          entity.accel.nogravity = false;
+          entity.accel.nofriction = false;
           entity.grab.target = null;
           entity.grab.mode = null;
         }
@@ -223,7 +223,7 @@ export function GrabSystem(entity: GrabEntity): void {
   });
 }
 
-function _ladder(max: number | null,
+function _ladder(max: number | undefined,
                 adjust: number,
                 left?: boolean | null,
                 right?: boolean | null)

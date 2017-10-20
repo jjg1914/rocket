@@ -3,6 +3,8 @@ import {
   MovementData,
   PositionData,
   InputEventData,
+  AccelData,
+  CollisionData,
   CollisionEventData,
 } from "mu-engine";
 
@@ -11,6 +13,8 @@ import { DieEvent } from "../events/die-event";
 export interface DieEntity extends Entity {
   position: PositionData,
   movement: MovementData;
+  accel: AccelData;
+  collision: CollisionData;
 }
 
 export function DieSystem(entity: DieEntity): void {
@@ -24,11 +28,11 @@ export function DieSystem(entity: DieEntity): void {
 
   entity.on("die", () => {
     if (!_die) {
-      entity.position.ignoreSolid = true;
+      entity.collision.ignoreSolid = true;
       entity.movement.ySpeed = -160;
-      entity.movement.yAccel= 0;
+      entity.accel.yAccel= 0;
       entity.movement.xSpeed = 0;
-      entity.movement.xAccel= 0;
+      entity.accel.xAccel= 0;
       _die = true;
     }
   });

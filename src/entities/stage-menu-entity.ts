@@ -1,5 +1,7 @@
 import {
   BaseEntity,
+  PositionData,
+  PositionComponent,
   RenderData,
   RenderComponent,
   RenderSystem,
@@ -21,48 +23,37 @@ export interface StageMenuConfig {
 }
 
 export class StageMenuEntity extends BaseEntity {
+  position: PositionData;
   render: RenderData;
-constructor(config: StageMenuConfig) {
+
+  constructor(config: StageMenuConfig) {
     super();
 
+    this.position = new PositionComponent({
+      width: 192,
+      height: 144,
+    });
+
     this.render = new RenderComponent({
+      fill: "#000000",
       children: [
         {
-          stroke: null,
-          fill: "#000000",
-          depth: 0,
-          transform: [ 192, 0, 0, 0, 144, 0],
-          children: [],
-        },
-        {
-          stroke: null,
-          fill: null,
-          depth: 0,
           transform: [ 1, 0, 8, 0, 1, 13],
           children: [
             {
-              stroke: null,
               fill: "#FFFFFF",
               shape: new Circle(4, 0, 0),
-              depth: 0,
-              transform: [ 1, 0, 0, 0, 1, 0],
-              children: [],
+              transform: [ 1, 0, 0, 0, 1, 0 ] as Transform,
             }
           ],
         },
         {
-          stroke: null,
-          fill: null,
-          depth: 0,
           transform: [ 1, 0, 16, 0, 1, 16],
           children: config.assets.stages().map((e, i) => {
             return {
               text: e,
-              stroke: null,
               fill: "#FFFFFF",
-              depth: 0,
               transform: [ 1, 0, 0, 0, 1, i * 16] as Transform,
-              children: [],
             };
           }),
         },
@@ -91,8 +82,18 @@ constructor(config: StageMenuConfig) {
         break;
       }
 
-      identity(this.render.children[1].children[0].transform);
-      translate(this.render.children[1].children[0].transform, 0, position * 16);
+      if (this.render.children != undefined)  {
+        const child1 = this.render.children[0];
+
+        if (child1.children != undefined) {
+          const transform = child1.children[0].transform;
+
+          if (transform != undefined) {
+            identity(transform);
+            translate(transform, 0, position * 16);
+          }
+        }
+      }
     });
 
     RenderSystem(this);

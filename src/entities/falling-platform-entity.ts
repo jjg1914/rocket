@@ -5,6 +5,10 @@ import {
   MovementComponent,
   RenderData,
   RenderComponent,
+  AccelData,
+  AccelComponent,
+  CollisionData,
+  CollisionComponent,
   CollisionSystem,
   AccelSystem,
   MoveSystem,
@@ -18,24 +22,34 @@ export interface FloorConfig {
   position: Partial<PositionData>;
   movement: Partial<MovementData>;
   render: Partial<RenderData>;
+  collision: Partial<CollisionData>;
+  accel: Partial<AccelData>;
 }
 
 export class FallingPlatformEntity extends BaseEntity {
   position: PositionData;
   render: RenderData;
   movement: MovementData;
+  collision: CollisionData;
+  accel: AccelData;
 
   constructor(config: Partial<FloorConfig>) {
     super();
 
-    this.position = new PositionComponent(Object.assign({
-      solid: [ null, 1 ],
-    }, config.position));
-    this.movement = new MovementComponent(Object.assign({
-      friction: 128,
+    this.accel= new AccelComponent(Object.assign({
+      friction: 224,
       yMax: 192,
       nogravity: true,
-    }, config.movement));
+    }, config.accel));
+
+    this.position = new PositionComponent(config.position);
+
+    this.movement = new MovementComponent(config.movement);
+
+    this.collision = new CollisionComponent(Object.assign({
+      solid: [ null, 1 ],
+    }, config.collision));
+
     this.render = new RenderComponent(Object.assign({
       sprite: "block.json",
       spriteFrame: 0,

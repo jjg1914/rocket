@@ -5,6 +5,10 @@ import {
   PathComponent,
   MovementData,
   MovementComponent,
+  AccelData,
+  AccelComponent,
+  CollisionData,
+  CollisionComponent,
   RenderData,
   RenderComponent,
   CollisionSystem,
@@ -16,6 +20,8 @@ import {
 export interface FloorConfig {
   position: Partial<PositionData>;
   movement: Partial<MovementData>;
+  collision: Partial<CollisionData>;
+  accel: Partial<AccelData>;
   path: Partial<PathData>;
   render: Partial<RenderData>;
 }
@@ -24,6 +30,8 @@ export class PlatformEntity extends BaseEntity {
   position: PositionData;
   render: RenderData;
   movement: MovementData;
+  collision: CollisionData;
+  accel: AccelData;
   path: PathData;
 
   constructor(config: Partial<FloorConfig>) {
@@ -32,12 +40,19 @@ export class PlatformEntity extends BaseEntity {
     this.position = new PositionComponent(Object.assign({
       solid: [ null, 1 ],
     }, config.position));
-    this.movement = new MovementComponent(Object.assign({
+
+    this.accel= new AccelComponent(Object.assign({
       friction: 128,
-    }, config.movement));
+    }, config.accel));
+
+    this.movement = new MovementComponent({});
+
+    this.collision = new CollisionComponent(config.collision);
+
     this.path = new PathComponent(Object.assign({
       repeat: true,
     }, config.path));
+
     this.render = new RenderComponent(config.render);
 
     PathSystem(this);

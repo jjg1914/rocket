@@ -1,9 +1,9 @@
 import {
   Assets,
   StackEntity,
-  RenderModule,
-  IntervalModule,
-  InputModule,
+  RenderMediatorSystem,
+  IntervalSystem,
+  InputSystem,
 } from "mu-engine";
 
 import TestStage from "../assets/test-stage.tmx";
@@ -12,6 +12,7 @@ import * as Spikes from "../assets/spikes.json";
 import * as Block from "../assets/block.json";
 import * as Player from "../assets/player.json";
 import Stage1 from "../assets/stage1.tmx";
+import Stage2 from "../assets/stage2.tmx";
 import * as Path1 from "../assets/path-1.json";
 import * as Path2 from "../assets/path-2.json";
 
@@ -24,6 +25,7 @@ const assets = new Assets({
     "block.json": { type: "sprite", data: Block },
     "player.json": { type: "sprite", data: Player },
     "stage1.tmx": { type: "stage", data: Stage1 },
+    "stage2.tmx": { type: "stage", data: Stage2 },
     "path-1.json": { type: "path", data: Path1 },
     "path-2.json": { type: "path", data: Path2 },
   }
@@ -56,22 +58,16 @@ document.addEventListener("DOMContentLoaded", () => {
       },
     }));
 
-    InputModule(stack, {
-      input: {
-        canvas: canvas,
-      }
-    });
-    IntervalModule(stack, { interval: { fps: 60 } });
-    RenderModule(stack, {
-      render: {
-        canvas: canvas as HTMLCanvasElement,
-        assets: assets,
-        width: 192,
-        height: 144,
-        smoothing: false,
-        scale: 2,
-        background: "#FFFFFF",
-      }
+    InputSystem(stack, { canvas: canvas });
+    IntervalSystem(stack, { fps: 60 });
+    RenderMediatorSystem(stack, {
+      canvas: canvas as HTMLCanvasElement,
+      assets: assets,
+      width: 192,
+      height: 144,
+      smoothing: false,
+      scale: 2,
+      background: "#FFFFFF",
     });
   }
 });

@@ -18,6 +18,8 @@ export class StageEntity extends BaseStageEntity {
   constructor(config: StageConfig) {
     super(config);
 
+    this.render.fill = "#000";
+
     const player = new PlayerEntity({
       position: this.stage.prop("player"),
     });

@@ -3,8 +3,8 @@ import { CollisionEntity, EntityDestroyEvent } from "mu-engine";
 export function FallingSystem(entity: CollisionEntity): void {
   entity.on("landing", () => {
     setTimeout(() => {
-      if (entity.movement != null) {
-        entity.movement.nogravity = false;
+      if (entity.accel != null) {
+        entity.accel.nogravity = false;
       }
     }, 500);
   });
