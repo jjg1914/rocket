@@ -3,6 +3,8 @@ import { merge } from "lodash";
 import {
   AnimationData,
   AnimationComponent,
+  ControlData,
+  ControlComponent,
   Control2WaySystem,
   AnimationSystem,
   MoveSystem,
@@ -26,7 +28,7 @@ export class PlayerEntity extends SimpleEntity {
   animation: AnimationData;
   grab: GrabData;
   stats: StatsData;
-  control: { xAccel: number, jumpSpeed: number, jumpCutoff: number };
+  control: ControlData;
 
   constructor(config: Partial<PlayerConfig>) {
     super(merge({
@@ -52,11 +54,11 @@ export class PlayerEntity extends SimpleEntity {
       hitPointsMax: 5,
     }, config.stats));
 
-    this.control = {
+    this.control = new ControlComponent({
       xAccel: 192,
       jumpSpeed: 224,
       jumpCutoff: 100,
-    };
+    });
 
     this.on("start-right", () => {
       this.animation.tag = "walk-right";
