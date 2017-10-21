@@ -34,6 +34,7 @@ const assets = new Assets({
 import { GrabEntity } from "./entities/grab-entity";
 import { FloorEntity } from "./entities/floor-entity";
 import { PlatformEntity } from "./entities/platform-entity";
+import { PathPlatformEntity } from "./entities/path-platform-entity";
 import { FallingPlatformEntity } from "./entities/falling-platform-entity";
 import { PhasePlatformEntity } from "./entities/phase-platform-entity";
 import { SpikesEntity } from "./entities/spikes-entity";
@@ -50,7 +51,8 @@ document.addEventListener("DOMContentLoaded", () => {
       entities: {
         default: FloorEntity,
         floor: FloorEntity,
-        platform: PlatformEntity,
+        "platform": PlatformEntity,
+        "path-platform": PathPlatformEntity,
         "falling-platform": FallingPlatformEntity,
         "phase-platform": PhasePlatformEntity,
         grab: GrabEntity,

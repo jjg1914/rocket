@@ -1,28 +1,13 @@
-import {
-  SimpleEntityConfig,
-  SimpleEntity,
-  PathSystem,
-  PathData,
-  PathComponent,
-} from "mu-engine";
+import merge from "lodash.merge";
 
-export interface FloorConfig extends SimpleEntityConfig {
-  path: Partial<PathData>;
-}
+import { SimpleEntityConfig } from "mu-engine";
 
-export class PlatformEntity extends SimpleEntity {
-  path: PathData;
+import { FloorEntity } from "./floor-entity";
 
-  constructor(config: Partial<FloorConfig>) {
-    super({
+export class PlatformEntity extends FloorEntity {
+  constructor(config: Partial<SimpleEntityConfig>) {
+    super(merge({
       collision: { solid: [ null, 1 ] },
-      accel: { friction: 128 },
-    }, config);
-
-    this.path = new PathComponent(Object.assign({
-      repeat: true,
-    }, config.path));
-
-    PathSystem(this);
+    }, config));
   }
 }

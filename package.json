@@ -31,6 +31,8 @@
     "xml2js": "^0.4.17"
   },
   "dependencies": {
+    "@types/lodash.merge": "^4.6.3",
+    "lodash.merge": "^4.6.0",
     "mu-engine": "^0.7.0"
   }
 }
