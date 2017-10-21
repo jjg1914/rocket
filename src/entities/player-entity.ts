@@ -1,23 +1,12 @@
 import {
-  PositionData,
-  PositionComponent,
-  MovementData,
-  MovementComponent,
-  RenderData,
-  RenderComponent,
   AnimationData,
   AnimationComponent,
-  AccelData,
-  AccelComponent,
-  CollisionData,
-  CollisionComponent,
-  CollisionSystem,
-  MoveSystem,
   Control2WaySystem,
-  AccelSystem,
-  RenderSystem,
   AnimationSystem,
-  BaseEntity,
+  MoveSystem,
+  AccelSystem,
+  SimpleEntityConfig,
+  SimpleEntity,
 } from "mu-engine";
 
 import { GrabData, GrabComponent } from "../components/grab-component";
@@ -25,65 +14,41 @@ import { StatsData, StatsComponent } from "../components/stats-component";
 import { GrabSystem } from "../systems/grab-system";
 import { DieSystem } from "../systems/die-system";
 
-export interface PlayerConfig {
-  position: Partial<PositionData>;
-  render: Partial<RenderData>;
+export interface PlayerConfig extends SimpleEntityConfig {
   animation: Partial<AnimationData>;
-  movement: Partial<MovementData>;
-  collision: Partial<CollisionData>;
-  accel: Partial<AccelData>;
   grab: Partial<GrabData>;
   stats: Partial<StatsData>
 }
 
-export class PlayerEntity extends BaseEntity {
-  position: PositionData;
-  render: RenderData;
+export class PlayerEntity extends SimpleEntity {
   animation: AnimationData;
-  movement: MovementData;
   grab: GrabData;
   stats: StatsData;
-  collision: CollisionData;
-  accel: AccelData;
   control: { xAccel: number, jumpSpeed: number, jumpCutoff: number };
 
   constructor(config: Partial<PlayerConfig>) {
-    super();
+    super({
+      position: { width: 12, height: 14 },
+      accel: { drag: 96 },
+      movement: { restrict: [ 0, null ], xMax: 64, yMax: 224 },
+      render: {
+        transform: [ 1, 0, -2, 0, 1, -2 ],
+        sprite: "player.json",
+        spriteFrame: 0,
+        depth: 1,
+      },
+    }, config);
 
-    this.position = new PositionComponent(Object.assign({
-      width: 12,
-      height: 14,
-    }, config.position));
-
-    this.accel= new AccelComponent(Object.assign({
-      drag: 96,
-    }, config.accel));
-
-    this.movement = new MovementComponent(Object.assign({
-      restrict: [ 0, null ],
-      xMax: 64,
-      yMax: 224,
-    }, config.movement));
-
-    this.collision = new CollisionComponent(config.collision);
-
-    this.render = new RenderComponent(Object.assign({
-      transform: [ 1, 0, -2, 0, 1, -2 ],
-      sprite: "player.json",
-      spriteFrame: 0,
-      depth: 1,
-    }, config.render));
-
-    this.animation = new AnimationComponent(Object.assign({
+    this.animation = new AnimationComponent({
       tag: "stand-right",
-    }, config.render));
+    }, config.animation);
 
     this.grab = new GrabComponent(config.grab);
 
-    this.stats = new StatsComponent(Object.assign({
+    this.stats = new StatsComponent({
       hitPoints: 5,
       hitPointsMax: 5,
-    }, config.stats));
+    }, config.stats);
 
     this.control = {
       xAccel: 192,
@@ -113,8 +78,6 @@ export class PlayerEntity extends BaseEntity {
 
     AccelSystem(this);
     MoveSystem(this);
-    CollisionSystem(this);
     AnimationSystem(this);
-    RenderSystem(this);
   }
 }
