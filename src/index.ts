@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
       entities: {
         default: FloorEntity,
         floor: FloorEntity,
-        "platform": PlatformEntity,
+        platform: PlatformEntity,
         "path-platform": PathPlatformEntity,
         "falling-platform": FallingPlatformEntity,
         "phase-platform": PhasePlatformEntity,

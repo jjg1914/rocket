@@ -1,3 +1,5 @@
+import { merge } from "lodash";
+
 import {
   SimpleEntityConfig,
   SimpleEntity,
@@ -13,12 +15,12 @@ export interface GrabConfig extends SimpleEntityConfig {
 
 export class GrabEntity extends SimpleEntity {
   constructor(config: Partial<GrabConfig>) {
-    super({
+    super(merge({
       accel: { drag: 96, nogravity: _nogravityForMode(config.grabable) },
       render: { fill: "#FF0000" },
-    }, config);
+    }, config));
 
-    GrabableSystem(this, Object.assign({
+    GrabableSystem(this, merge({
       mode: "pickup",
     }, config.grabable));
 

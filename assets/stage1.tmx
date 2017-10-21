@@ -27,41 +27,21 @@
 183,184,183,184,183,184,183,184,183,184,183,23,23,184,183,184,183,23,23,184,183,184,183,184,183,184,183,93,94,94,95,184,183,184,183,184,183,184,183,184,23,23,183,184,183,93,94,94,95,184,183,184,183,184,183,184,183,184,183,184,183,184,183,184,183,184,183,184,183,184,183,184,183,93,94,94,95,3,89,90,183,184,183,184,183,184,183,184,183,184,183,184,183,184,183,184,183,184,183,184,183,184,183,184,183,184,183,184,183,184,183,184,
 163,164,163,164,163,164,163,164,163,164,163,164,163,164,163,164,163,164,163,164,163,164,163,164,163,164,163,93,94,94,95,164,163,164,163,164,163,164,163,164,163,164,163,164,163,93,94,94,95,164,163,164,163,164,163,164,163,164,163,164,163,164,163,164,163,164,163,164,163,164,163,164,163,93,94,95,3,3,3,89,90,164,163,164,163,164,23,164,163,164,163,164,163,164,163,164,163,164,163,164,163,23,163,164,163,164,163,93,94,94,95,3,
 183,184,183,184,183,184,183,184,183,184,183,184,183,184,183,184,183,184,183,184,183,184,183,184,183,184,183,93,94,94,95,184,183,184,183,184,183,23,23,184,183,184,183,184,183,93,94,94,95,184,183,184,183,184,183,184,183,184,183,184,183,184,183,184,183,184,183,29,183,184,183,184,183,93,95,3,3,3,3,3,3,93,95,184,183,184,183,184,183,184,183,184,183,184,183,184,183,184,183,184,183,184,183,184,183,184,183,93,94,95,3,3,
-3,3,3,3,3,3,3,3,3,164,163,164,163,164,163,164,163,164,163,164,163,164,29,164,163,164,163,93,94,94,95,164,163,164,163,164,163,164,163,164,163,164,163,164,163,93,94,94,95,164,163,164,163,164,163,164,163,164,163,164,163,164,163,164,163,164,163,29,163,164,163,164,163,93,3,3,3,3,3,3,3,3,95,164,163,164,163,164,163,164,163,164,163,164,163,164,163,164,163,164,163,164,163,164,163,164,163,93,95,3,3,3
+3,3,3,3,3,3,3,3,3,164,163,164,163,164,163,164,163,164,163,164,163,164,29,164,163,164,163,93,94,94,95,164,163,164,163,164,163,164,163,164,163,164,163,164,163,93,94,94,95,164,163,164,163,164,163,164,163,164,163,164,163,164,163,164,163,164,163,29,163,164,163,164,163,96,3,3,3,3,3,3,3,3,96,164,163,164,163,164,163,164,163,164,163,164,163,164,163,164,163,164,163,164,163,164,163,164,163,93,95,3,3,3
 </data>
  </layer>
  <objectgroup name="Object Layer 1">
   <object id="35" type="floor" x="0" y="128" width="144" height="16"/>
-  <object id="36" type="floor" x="176" y="80" width="32" height="8">
-   <properties>
-    <property name="collision.solid" value="[ null, 1 ]"/>
-   </properties>
-  </object>
-  <object id="40" type="floor" x="272" y="80" width="32" height="8">
-   <properties>
-    <property name="collision.solid" value="[ null, 1 ]"/>
-   </properties>
-  </object>
+  <object id="36" type="platform" x="176" y="80" width="32" height="8"/>
+  <object id="40" type="platform" x="272" y="80" width="32" height="8"/>
   <object id="42" type="floor" x="432" y="64" width="64" height="80"/>
   <object id="45" type="floor" x="352" y="128" width="16" height="16"/>
-  <object id="46" type="floor" x="368" y="64" width="32" height="8">
-   <properties>
-    <property name="collision.solid" value="[ null, 1 ]"/>
-   </properties>
-  </object>
+  <object id="46" type="platform" x="368" y="64" width="32" height="8"/>
   <object id="47" type="floor" x="352" y="0" width="16" height="80"/>
   <object id="48" type="spikes" x="432" y="48" width="16" height="16"/>
-  <object id="50" type="floor" x="544" y="64" width="32" height="8">
-   <properties>
-    <property name="collision.solid" value="[ null, 1 ]"/>
-   </properties>
-  </object>
+  <object id="50" type="platform" x="544" y="64" width="32" height="8"/>
   <object id="51" type="spikes" x="560" y="48" width="16" height="16"/>
-  <object id="52" type="floor" x="592" y="112" width="32" height="8">
-   <properties>
-    <property name="collision.solid" value="[ null, 1 ]"/>
-   </properties>
-  </object>
+  <object id="52" type="platform" x="592" y="112" width="32" height="8"/>
   <object id="53" type="spikes" x="608" y="96" width="16" height="16"/>
   <object id="54" type="spikes" x="656" y="64" width="16" height="16"/>
   <object id="55" type="floor" x="640" y="80" width="32" height="8">
@@ -69,16 +49,8 @@
     <property name="position.solid" value="[ null, 1 ]"/>
    </properties>
   </object>
-  <object id="56" type="floor" x="640" y="80" width="32" height="8">
-   <properties>
-    <property name="collision.solid" value="[ null, 1 ]"/>
-   </properties>
-  </object>
-  <object id="57" type="floor" x="640" y="32" width="32" height="8">
-   <properties>
-    <property name="collision.solid" value="[ null, 1 ]"/>
-   </properties>
-  </object>
+  <object id="56" type="platform" x="640" y="80" width="32" height="8"/>
+  <object id="57" type="platform" x="640" y="32" width="32" height="8"/>
   <object id="58" type="floor" x="1072" y="0" width="16" height="32"/>
   <object id="59" type="falling-platform" x="816" y="112" width="16" height="16"/>
   <object id="60" type="falling-platform" x="896" y="112" width="16" height="16"/>
@@ -90,20 +62,12 @@
   <object id="66" type="floor" x="720" y="48" width="64" height="96"/>
   <object id="67" type="floor" x="1072" y="112" width="16" height="32"/>
   <object id="68" type="floor" x="1168" y="48" width="64" height="96"/>
-  <object id="70" type="floor" x="1376" y="96" width="16" height="8">
-   <properties>
-    <property name="collision.solid" value="[ null, 1 ]"/>
-   </properties>
-  </object>
+  <object id="70" type="platform" x="1376" y="96" width="16" height="8"/>
   <object id="71" type="spikes" x="1376" y="80" width="16" height="16"/>
   <object id="72" type="falling-platform" x="1360" y="96" width="16" height="16"/>
   <object id="73" type="falling-platform" x="1392" y="96" width="16" height="16"/>
   <object id="76" type="falling-platform" x="1456" y="96" width="16" height="16"/>
-  <object id="77" type="floor" x="1424" y="64" width="16" height="8">
-   <properties>
-    <property name="collision.solid" value="[ null, 1 ]"/>
-   </properties>
-  </object>
+  <object id="77" type="platform" x="1424" y="64" width="16" height="8"/>
   <object id="78" type="spikes" x="1424" y="48" width="16" height="16"/>
   <object id="79" name="ramp-2" type="floor" x="1232" y="112">
    <polygon points="0,0 0,-64 64,0"/>
@@ -115,26 +79,10 @@
   <object id="85" type="falling-platform" x="1568" y="32" width="16" height="16"/>
   <object id="86" type="falling-platform" x="1600" y="64" width="16" height="16"/>
   <object id="87" type="falling-platform" x="1632" y="96" width="16" height="16"/>
-  <object id="88" type="floor" x="1504" y="48" width="16" height="8">
-   <properties>
-    <property name="collision.solid" value="[ null, 1 ]"/>
-   </properties>
-  </object>
-  <object id="89" type="floor" x="1584" y="64" width="16" height="8">
-   <properties>
-    <property name="collision.solid" value="[ null, 1 ]"/>
-   </properties>
-  </object>
-  <object id="90" type="floor" x="1616" y="96" width="16" height="8">
-   <properties>
-    <property name="collision.solid" value="[ null, 1 ]"/>
-   </properties>
-  </object>
-  <object id="91" type="floor" x="1552" y="32" width="16" height="8">
-   <properties>
-    <property name="collision.solid" value="[ null, 1 ]"/>
-   </properties>
-  </object>
+  <object id="88" type="platform" x="1504" y="48" width="16" height="8"/>
+  <object id="89" type="platform" x="1584" y="64" width="16" height="8"/>
+  <object id="90" type="platform" x="1616" y="96" width="16" height="8"/>
+  <object id="91" type="platform" x="1552" y="32" width="16" height="8"/>
   <object id="92" type="spikes" x="1552" y="16" width="16" height="16"/>
   <object id="93" type="spikes" x="1584" y="48" width="16" height="16"/>
   <object id="94" type="spikes" x="1616" y="80" width="16" height="16"/>

@@ -11,10 +11,10 @@ export class GrabComponent implements GrabData {
   mode: GrabType | null;
   target: CollisionEntity | null;
 
-  constructor(...options: (Partial<GrabData> | undefined)[]) {
+  constructor(options?: Partial<GrabData>) {
     Object.assign(this, {
       mode: null,
       target: null,
-    }, ...options);
+    }, options);
   }
 }

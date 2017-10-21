@@ -1,3 +1,5 @@
+import { merge } from "lodash";
+
 import {
   ResolutionEvent,
   SimpleEntityConfig,
@@ -6,9 +8,9 @@ import {
 
 export class SpikesEntity extends SimpleEntity {
   constructor(config: Partial<SimpleEntityConfig>) {
-    super({
+    super(merge({
       render: { sprite: "spikes.json", spriteFrame: 0 },
-    }, config);
+    }, config));
 
     this.on("collision", (ev: ResolutionEvent) => {
       ev.target.send("die");

@@ -1,3 +1,5 @@
+import { merge } from "lodash";
+
 import {
   AnimationData,
   AnimationComponent,
@@ -27,7 +29,7 @@ export class PlayerEntity extends SimpleEntity {
   control: { xAccel: number, jumpSpeed: number, jumpCutoff: number };
 
   constructor(config: Partial<PlayerConfig>) {
-    super({
+    super(merge({
       position: { width: 12, height: 14 },
       accel: { drag: 96 },
       movement: { restrict: [ 0, null ], xMax: 64, yMax: 224 },
@@ -37,18 +39,18 @@ export class PlayerEntity extends SimpleEntity {
         spriteFrame: 0,
         depth: 1,
       },
-    }, config);
+    }, config));
 
-    this.animation = new AnimationComponent({
+    this.animation = new AnimationComponent(merge({
       tag: "stand-right",
-    }, config.animation);
+    }, config.animation));
 
     this.grab = new GrabComponent(config.grab);
 
-    this.stats = new StatsComponent({
+    this.stats = new StatsComponent(merge({
       hitPoints: 5,
       hitPointsMax: 5,
-    }, config.stats);
+    }, config.stats));
 
     this.control = {
       xAccel: 192,
