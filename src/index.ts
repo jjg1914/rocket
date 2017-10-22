@@ -9,6 +9,7 @@ import {
 import TestStage from "../assets/test-stage.tmx";
 import * as Tileset from "../assets/tileset.json";
 import * as Spikes from "../assets/spikes.json";
+import * as Fruit from "../assets/fruit.json";
 import * as Block from "../assets/block.json";
 import * as Player from "../assets/player.json";
 import Stage1 from "../assets/stage1.tmx";
@@ -22,6 +23,7 @@ const assets = new Assets({
     "test-stage.tmx": { type: "stage", data: TestStage },
     "tileset.json": { type: "tileset", data: Tileset },
     "spikes.json": { type: "sprite", data: Spikes },
+    "fruit.json": { type: "sprite", data: Fruit },
     "block.json": { type: "sprite", data: Block },
     "player.json": { type: "sprite", data: Player },
     "stage1.tmx": { type: "stage", data: Stage1 },
@@ -38,6 +40,7 @@ import { PathPlatformEntity } from "./entities/path-platform-entity";
 import { FallingPlatformEntity } from "./entities/falling-platform-entity";
 import { PhasePlatformEntity } from "./entities/phase-platform-entity";
 import { SpikesEntity } from "./entities/spikes-entity";
+import { FruitEntity } from "./entities/fruit-entity";
 
 import { StageMenuEntity } from "./entities/stage-menu-entity";
 
@@ -57,6 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "phase-platform": PhasePlatformEntity,
         grab: GrabEntity,
         spikes: SpikesEntity,
+        fruit: FruitEntity,
       },
     }));
 
