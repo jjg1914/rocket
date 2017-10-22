@@ -14,11 +14,18 @@ export class HudEntity extends BaseEntity {
   constructor() {
     super();
 
-    this.position = new PositionComponent({});
+    this.position = new PositionComponent({
+      width: 192,
+      height: 20,
+    });
 
     this.render = new RenderComponent({
       children: [
-        { fill: "#FF0000" },
+        {
+          sprite: "fruit.json",
+          spriteFrame: 0,
+          transform: [ 1, 0, 6, 0, 1, 2 ],
+        },
       ],
     });
 
