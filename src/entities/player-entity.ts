@@ -55,6 +55,8 @@ export class PlayerEntity extends SimpleEntity {
     }, config.stats));
 
     this.control = new ControlComponent({
+      xSpeed: 64,
+      ySpeed: 64,
       xAccel: 192,
       jumpSpeed: 224,
       jumpCutoff: 100,
