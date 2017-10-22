@@ -1,0 +1,26 @@
+{ "frames": {
+   "platform.ase": {
+    "frame": { "x": 0, "y": 0, "w": 32, "h": 8 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 8 },
+    "sourceSize": { "w": 32, "h": 8 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.2.2",
+  "image": "/Users/jjg1914/Programs/rocket/assets/sprites/platform.png",
+  "format": "RGBA8888",
+  "size": { "w": 32, "h": 8 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Layer 1", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

@@ -17,6 +17,7 @@ import Stage2 from "../assets/stage2.tmx";
 import * as Path1 from "../assets/path-1.json";
 import * as Path2 from "../assets/path-2.json";
 import * as Spring from "../assets/sprites/spring.json";
+import * as Platform from "../assets/sprites/platform.json";
 
 const assets = new Assets({
   preload: true,
@@ -30,6 +31,7 @@ const assets = new Assets({
     "stage1.tmx": { type: "stage", data: Stage1 },
     "stage2.tmx": { type: "stage", data: Stage2 },
     "spring.json": { type: "sprite", data: Spring },
+    "platform.json": { type: "sprite", data: Platform },
     "path-1.json": { type: "path", data: Path1 },
     "path-2.json": { type: "path", data: Path2 },
   }
@@ -41,6 +43,7 @@ import { PlatformEntity } from "./entities/platform-entity";
 import { PathPlatformEntity } from "./entities/path-platform-entity";
 import { FallingPlatformEntity } from "./entities/falling-platform-entity";
 import { PhasePlatformEntity } from "./entities/phase-platform-entity";
+import { OscillatePlatformEntity } from "./entities/oscillate-platform-entity";
 import { SpikesEntity } from "./entities/spikes-entity";
 import { FruitEntity } from "./entities/fruit-entity";
 import { SpringEntity } from "./entities/spring-entity";
@@ -61,6 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "path-platform": PathPlatformEntity,
         "falling-platform": FallingPlatformEntity,
         "phase-platform": PhasePlatformEntity,
+        "oscillate-platform": OscillatePlatformEntity,
         grab: GrabEntity,
         spikes: SpikesEntity,
         fruit: FruitEntity,
