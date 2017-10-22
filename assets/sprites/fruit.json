@@ -299,7 +299,7 @@
  "meta": {
   "app": "http://www.aseprite.org/",
   "version": "1.2.2",
-  "image": "/Users/jjg1914/Programs/rocket/assets/fruit.png",
+  "image": "/Users/jjg1914/Programs/rocket/assets/sprites/fruit.png",
   "format": "RGBA8888",
   "size": { "w": 592, "h": 16 },
   "scale": "1",

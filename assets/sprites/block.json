@@ -1,5 +1,5 @@
 { "frames": {
-   "spikes.ase": {
+   "block.ase": {
     "frame": { "x": 0, "y": 0, "w": 16, "h": 16 },
     "rotated": false,
     "trimmed": false,
@@ -11,7 +11,7 @@
  "meta": {
   "app": "http://www.aseprite.org/",
   "version": "1.2.2",
-  "image": "/Users/jjg1914/Programs/rocket/assets/spikes.png",
+  "image": "/Users/jjg1914/Programs/rocket/assets/sprites/block.png",
   "format": "RGBA8888",
   "size": { "w": 16, "h": 16 },
   "scale": "1",
