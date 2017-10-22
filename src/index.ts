@@ -6,30 +6,33 @@ import {
   InputSystem,
 } from "mu-engine";
 
-import TestStage from "../assets/test-stage.tmx";
-import * as Tileset from "../assets/tileset.json";
-import * as Spikes from "../assets/spikes.json";
-import * as Fruit from "../assets/fruit.json";
-import * as Block from "../assets/block.json";
-import * as Player from "../assets/player.json";
-import Stage1 from "../assets/stage1.tmx";
-import Stage2 from "../assets/stage2.tmx";
-import * as Path1 from "../assets/path-1.json";
-import * as Path2 from "../assets/path-2.json";
+import TestStage from "../assets/stages/test-stage.tmx";
+import Stage1 from "../assets/stages/stage1.tmx";
+import Stage2 from "../assets/stages/stage2.tmx";
+
+import * as Tileset from "../assets/tilesets/tileset.json";
+
+import * as Spikes from "../assets/sprites/spikes.json";
+import * as Fruit from "../assets/sprites/fruit.json";
+import * as Block from "../assets/sprites/block.json";
+import * as Player from "../assets/sprites/player.json";
 import * as Spring from "../assets/sprites/spring.json";
 import * as Platform from "../assets/sprites/platform.json";
+
+import * as Path1 from "../assets/paths/path-1.json";
+import * as Path2 from "../assets/paths/path-2.json";
 
 const assets = new Assets({
   preload: true,
   assets: {
     "test-stage.tmx": { type: "stage", data: TestStage },
+    "stage1.tmx": { type: "stage", data: Stage1 },
+    "stage2.tmx": { type: "stage", data: Stage2 },
     "tileset.json": { type: "tileset", data: Tileset },
     "spikes.json": { type: "sprite", data: Spikes },
     "fruit.json": { type: "sprite", data: Fruit },
     "block.json": { type: "sprite", data: Block },
     "player.json": { type: "sprite", data: Player },
-    "stage1.tmx": { type: "stage", data: Stage1 },
-    "stage2.tmx": { type: "stage", data: Stage2 },
     "spring.json": { type: "sprite", data: Spring },
     "platform.json": { type: "sprite", data: Platform },
     "path-1.json": { type: "path", data: Path1 },
