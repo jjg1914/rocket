@@ -3,6 +3,7 @@ import {
   PositionData,
   MovementData,
   CollisionData,
+  ControlData,
   AccelData,
 } from "mu-engine";
 import { GrabData } from "../components/grab-component";
@@ -10,14 +11,12 @@ import { GrabData } from "../components/grab-component";
 export type GrabEventType = "grab";
 
 export interface GrabEntity extends Entity {
-  control: {
-    xAccel: number,
-  },
   position: PositionData;
   grab: GrabData;
   movement: MovementData;
   accel: AccelData;
   collision: CollisionData;
+  control: ControlData;
 }
 
 export interface GrabEventData {

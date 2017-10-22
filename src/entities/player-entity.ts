@@ -34,7 +34,7 @@ export class PlayerEntity extends SimpleEntity {
     super(merge({
       position: { width: 12, height: 14 },
       accel: { drag: 96 },
-      movement: { restrict: [ 0, null ], xMax: 64, yMax: 224 },
+      movement: { restrict: [ 0, null ], xMax: 64, yMax: [ -Infinity, 224 ] },
       render: {
         transform: [ 1, 0, -2, 0, 1, -2 ],
         sprite: "player.json",

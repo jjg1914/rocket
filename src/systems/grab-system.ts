@@ -56,7 +56,7 @@ export function GrabSystem(entity: GrabEntity): void {
           const _up = event.inputs["ArrowUp"] || event.inputs["W"];
           const _down = event.inputs["ArrowDown"] || event.inputs["S"];
 
-          entity.movement.ySpeed = _ladder(entity.movement.xMax, 1, _up, _down);
+          entity.movement.ySpeed = _ladder(entity.control.ySpeed, 1, _up, _down);
 
           return true;
         }
@@ -69,13 +69,22 @@ export function GrabSystem(entity: GrabEntity): void {
           const _left = event.inputs["ArrowLeft"] || event.inputs["A"];
           const _right = event.inputs["ArrowRight"] || event.inputs["D"];
 
-          if (entity.movement.xMax != null) {
+          const max = entity.movement.xMax;
+          if (max != null) {
             if (_left && !_right) {
               entity.accel.xAccel = -entity.control.xAccel;
-              entity.movement.xSpeed = -entity.movement.xMax;
+              if (max instanceof Array) {
+                entity.movement.xSpeed = max[0];
+              } else {
+                entity.movement.xSpeed = -max;
+              }
             } else if (_right && !_left) {
               entity.accel.xAccel = entity.control.xAccel;
-              entity.movement.xSpeed = entity.movement.xMax;
+              if (max instanceof Array) {
+                entity.movement.xSpeed = max[1];
+              } else {
+                entity.movement.xSpeed = max;
+              }
             }
           }
 
@@ -106,7 +115,7 @@ export function GrabSystem(entity: GrabEntity): void {
         case "fixed":
           return true;
         case "ladder":
-          entity.movement.xSpeed = _ladder(entity.movement.xMax, 0.75, _left, _right);
+          entity.movement.xSpeed = _ladder(entity.control.xSpeed, 0.75, _left, _right);
 
           return true;
         }
@@ -129,7 +138,7 @@ export function GrabSystem(entity: GrabEntity): void {
         case "fixed":
           return true;
         case "ladder":
-          entity.movement.xSpeed = _ladder(entity.movement.xMax, 0.75, _left, _right);
+          entity.movement.xSpeed = _ladder(entity.control.xSpeed, 0.75, _left, _right);
         }
       }
       break;
@@ -143,7 +152,7 @@ export function GrabSystem(entity: GrabEntity): void {
 
         switch (entity.grab.mode) {
         case "ladder":
-          entity.movement.ySpeed = _ladder(entity.movement.xMax, 1, _up, _down);
+          entity.movement.ySpeed = _ladder(entity.control.ySpeed, 1, _up, _down);
 
           return true;
         }
@@ -198,7 +207,7 @@ export function GrabSystem(entity: GrabEntity): void {
             const _down = _grab.inputs["ArrowDown"] || _grab.inputs["S"];
 
             entity.movement.xSpeed = 0;
-            entity.movement.ySpeed = _ladder(entity.movement.xMax, 1, _up, _down);
+            entity.movement.ySpeed = _ladder(entity.control.ySpeed, 1, _up, _down);
           }
         } else {
           entity.accel.yAccel = 0;
