@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="112" height="9" tilewidth="16" tileheight="16" nextobjectid="96">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="112" height="9" tilewidth="16" tileheight="16" nextobjectid="131">
  <properties>
   <property name="player" value="{ &quot;x&quot;: 32, &quot;y&quot;: 114 }"/>
  </properties>
- <tileset firstgid="1" source="tileset.json"/>
+ <tileset firstgid="1" source="../tilesets/tileset.json"/>
  <layer name="Tile Layer 2" width="112" height="9">
   <data encoding="csv">
 163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,163,
@@ -87,5 +87,40 @@
   <object id="93" type="spikes" x="1584" y="48" width="16" height="16"/>
   <object id="94" type="spikes" x="1616" y="80" width="16" height="16"/>
   <object id="95" type="floor" x="1712" y="96" width="80" height="48"/>
+  <object id="96" type="fruit" x="192" y="32" width="16" height="16"/>
+  <object id="97" type="fruit" x="208" y="32" width="16" height="16"/>
+  <object id="98" type="fruit" x="224" y="32" width="16" height="16"/>
+  <object id="99" type="fruit" x="240" y="32" width="16" height="16"/>
+  <object id="100" type="fruit" x="256" y="32" width="16" height="16"/>
+  <object id="101" type="fruit" x="272" y="32" width="16" height="16"/>
+  <object id="102" type="fruit" x="416" y="16" width="16" height="16"/>
+  <object id="103" type="fruit" x="432" y="16" width="16" height="16"/>
+  <object id="104" type="fruit" x="448" y="16" width="16" height="16"/>
+  <object id="105" type="fruit" x="464" y="16" width="16" height="16"/>
+  <object id="106" type="fruit" x="624" y="16" width="16" height="16"/>
+  <object id="107" type="fruit" x="608" y="16" width="16" height="16"/>
+  <object id="108" type="fruit" x="592" y="16" width="16" height="16"/>
+  <object id="109" type="fruit" x="576" y="16" width="16" height="16"/>
+  <object id="110" type="fruit" x="544" y="48" width="16" height="16"/>
+  <object id="111" type="fruit" x="592" y="96" width="16" height="16"/>
+  <object id="112" type="fruit" x="640" y="64" width="16" height="16"/>
+  <object id="113" type="fruit" x="736" y="16" width="16" height="16"/>
+  <object id="114" type="fruit" x="752" y="16" width="16" height="16"/>
+  <object id="115" type="fruit" x="848" y="64" width="16" height="16"/>
+  <object id="116" type="fruit" x="864" y="64" width="16" height="16"/>
+  <object id="117" type="fruit" x="928" y="16" width="16" height="16"/>
+  <object id="118" type="fruit" x="944" y="16" width="16" height="16"/>
+  <object id="119" type="fruit" x="1072" y="32" width="16" height="16"/>
+  <object id="120" type="fruit" x="1072" y="48" width="16" height="16"/>
+  <object id="121" type="fruit" x="1232" y="32" width="16" height="16"/>
+  <object id="122" type="fruit" x="1248" y="48" width="16" height="16"/>
+  <object id="123" type="fruit" x="1264" y="64" width="16" height="16"/>
+  <object id="124" type="fruit" x="1280" y="80" width="16" height="16"/>
+  <object id="125" type="fruit" x="1376" y="32" width="16" height="16"/>
+  <object id="126" type="fruit" x="1424" y="16" width="16" height="16"/>
+  <object id="127" type="fruit" x="1504" y="0" width="16" height="16"/>
+  <object id="128" type="fruit" x="1568" y="16" width="16" height="16"/>
+  <object id="129" type="fruit" x="1600" y="48" width="16" height="16"/>
+  <object id="130" type="fruit" x="1632" y="80" width="16" height="16"/>
  </objectgroup>
 </map>
