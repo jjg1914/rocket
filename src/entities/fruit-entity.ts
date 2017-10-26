@@ -52,7 +52,9 @@ export class FruitEntity extends SimpleEntity {
 
     this.on("collision", (ev: ResolutionEvent) => {
       if (ev.target instanceof PlayerEntity) {
-        this.send("remove", new EntityDestroyEvent("remove"));
+        if (this.parent !== undefined) {
+          this.parent.send("remove", new EntityDestroyEvent("remove", this));
+        }
       }
     });
   }

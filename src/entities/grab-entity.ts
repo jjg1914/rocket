@@ -3,29 +3,41 @@ import { merge } from "lodash";
 import {
   SimpleEntityConfig,
   SimpleEntity,
+  AnimationData,
+  AnimationComponent,
+  AnimationSystem,
   MoveSystem,
   AccelSystem,
+  snapMiddle,
 } from "mu-engine";
 
 import { GrabableSystem, GrabableConfig } from "../systems/grabable-system";
 
 export interface GrabConfig extends SimpleEntityConfig {
   grabable: Partial<GrabableConfig>;
+  animation: Partial<AnimationData>;
 }
 
 export class GrabEntity extends SimpleEntity {
+  animation: AnimationData;
+
   constructor(config: Partial<GrabConfig>) {
     super(merge({
       accel: { drag: 96, nogravity: _nogravityForMode(config.grabable) },
       collision: { solid: _solidForMode(config.grabable) },
     }, config));
 
+    this.animation = new AnimationComponent(config.animation);
+
     GrabableSystem(this, merge({
       mode: "pickup",
     }, config.grabable));
 
+    snapMiddle(this, 16, 16);
+
     AccelSystem(this);
     MoveSystem(this);
+    AnimationSystem(this);
   }
 }
 

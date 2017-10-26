@@ -66,11 +66,13 @@ export class StageMenuEntity extends BaseEntity {
       switch (event.which) {
       case "Enter":
       case " ":
-        this.send("push", new EntityAddEvent("push", new StageEntity({
-          assets: config.assets,
-          stage: config.assets.stages()[position],
-          entities: config.entities,
-        }), { block: true }));
+        if (this.parent !== undefined) {
+          this.parent.send("push", new EntityAddEvent("push", new StageEntity({
+            assets: config.assets,
+            stage: config.assets.stages()[position],
+            entities: config.entities,
+          }), { block: true }));
+        }
         break;
       case "ArrowDown":
       case "S":

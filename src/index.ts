@@ -50,6 +50,7 @@ import { OscillatePlatformEntity } from "./entities/oscillate-platform-entity";
 import { SpikesEntity } from "./entities/spikes-entity";
 import { FruitEntity } from "./entities/fruit-entity";
 import { SpringEntity } from "./entities/spring-entity";
+import { DoorEntity } from "./entities/door-entity";
 
 import { StageMenuEntity } from "./entities/stage-menu-entity";
 
@@ -72,6 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
         spikes: SpikesEntity,
         fruit: FruitEntity,
         spring: SpringEntity,
+        door: DoorEntity,
       },
     }));
 

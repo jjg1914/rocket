@@ -1,6 +1,7 @@
 import {
   shapeFor,
   InputEventData,
+  CollisionEventData,
   ResolutionEventData,
   CollisionEntity,
   Collision,
@@ -25,10 +26,16 @@ export function GrabSystem(entity: GrabEntity): void {
         case "pickup":
           entity.grab.target.collision.ignoreSolid = false;
           entity.grab.target.collision.landing = undefined;
+
           if (entity.grab.target.movement != null) {
             entity.grab.target.movement.xSpeed = 2.33 * entity.movement.xSpeed;
             entity.grab.target.movement.ySpeed = -96;
           }
+
+          if (entity.grab.target.accel != null) {
+            entity.grab.target.accel.nogravity = false;
+          }
+
           entity.grab.target = null;
           entity.grab.mode = null;
           break;
@@ -167,14 +174,17 @@ export function GrabSystem(entity: GrabEntity): void {
     }
   });
 
-  entity.on("postcollision", () => {
-    for (let e of _collisions) {
-      if (e.send("grab", new GrabEvent(entity))) {
-        break;
+  entity.around("postcollision", (f: Function,
+                                  _ev: CollisionEventData): boolean => {
+    let rval = false;
+
+    if (!f() && _grab) {
+      for (let e of _collisions) {
+        if (e.send("grab", new GrabEvent(entity))) {
+          break;
+        }
       }
     }
-
-    _collisions.length = 0;
 
     if (entity.grab.target != null) {
       const b = shapeFor(entity).bounds();
@@ -186,8 +196,13 @@ export function GrabSystem(entity: GrabEntity): void {
         entity.grab.target.position.y = b.top - (c.bottom - c.top + 1);
         entity.grab.target.collision.ignoreSolid = true;
         entity.grab.target.collision.landing = undefined;
+
         if (entity.grab.target.movement != null) {
           entity.grab.target.movement.ySpeed = 0;
+        }
+
+        if (entity.grab.target.accel != null) {
+          entity.grab.target.accel.nogravity = true;
         }
 
         break;
@@ -222,9 +237,14 @@ export function GrabSystem(entity: GrabEntity): void {
       default:
         break;
       }
+
+      rval = true;
     }
 
     _grab = null;
+    _collisions.length = 0;
+
+    return rval;
   });
 }
 

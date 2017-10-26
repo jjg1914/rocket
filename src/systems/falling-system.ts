@@ -10,7 +10,9 @@ export function FallingSystem(entity: CollisionEntity): void {
   });
 
   entity.on("outofbounds", () => {
-    entity.send("remove", new EntityDestroyEvent("remove"));
+    if (entity.parent !== undefined) {
+      entity.parent.send("remove", new EntityDestroyEvent("remove", entity));
+    }
   });
 };
 

@@ -16,6 +16,7 @@ import {
 import { GrabData, GrabComponent } from "../components/grab-component";
 import { StatsData, StatsComponent } from "../components/stats-component";
 import { GrabSystem } from "../systems/grab-system";
+import { DoorSystem } from "../systems/door-system";
 import { DieSystem } from "../systems/die-system";
 
 export interface PlayerConfig extends SimpleEntityConfig {
@@ -79,11 +80,13 @@ export class PlayerEntity extends SimpleEntity {
     });
 
     DieSystem(this);
-    GrabSystem(this);
-    Control2WaySystem(this);
 
     AccelSystem(this);
     MoveSystem(this);
     AnimationSystem(this);
+
+    GrabSystem(this);
+    DoorSystem(this);
+    Control2WaySystem(this);
   }
 }
