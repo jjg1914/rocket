@@ -8,6 +8,7 @@ import {
   AnimationSystem,
   MoveSystem,
   AccelSystem,
+  LandingSystem,
   snapMiddle,
 } from "mu-engine";
 
@@ -37,6 +38,7 @@ export class GrabEntity extends SimpleEntity {
 
     AccelSystem(this);
     MoveSystem(this);
+    LandingSystem(this);
     AnimationSystem(this);
   }
 }

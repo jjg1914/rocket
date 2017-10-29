@@ -11,6 +11,8 @@ import {
   AccelSystem,
   SimpleEntityConfig,
   SimpleEntity,
+  LandingSystem,
+  RestrictSystem,
 } from "mu-engine";
 
 import { GrabData, GrabComponent } from "../components/grab-component";
@@ -83,6 +85,8 @@ export class PlayerEntity extends SimpleEntity {
 
     AccelSystem(this);
     MoveSystem(this);
+    LandingSystem(this);
+    RestrictSystem(this);
     AnimationSystem(this);
 
     GrabSystem(this);
