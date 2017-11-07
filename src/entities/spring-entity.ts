@@ -19,7 +19,7 @@ export class SpringEntity extends SimpleEntity {
 
   constructor(config: Partial<SpringEntityConfig>) {
     super(merge({
-      collision: { solid: [ null, 1 ] },
+      collision: { solid: [ NaN, 1 ] },
       render: { sprite: "spring.json", spriteFrame: 0 },
     }, config));
 

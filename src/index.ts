@@ -9,6 +9,8 @@ import {
 import TestStage from "../assets/stages/test-stage.tmx";
 import Stage1 from "../assets/stages/stage1.tmx";
 import Stage2 from "../assets/stages/stage2.tmx";
+import Stage3 from "../assets/stages/stage3.tmx";
+import Stage3a from "../assets/stages/stage3a.tmx";
 
 import * as Tileset from "../assets/tilesets/tileset.json";
 
@@ -18,6 +20,7 @@ import * as Block from "../assets/sprites/block.json";
 import * as Player from "../assets/sprites/player.json";
 import * as Spring from "../assets/sprites/spring.json";
 import * as Platform from "../assets/sprites/platform.json";
+import * as Grabbable from "../assets/sprites/grabbable.json";
 
 import * as Path1 from "../assets/paths/path-1.json";
 import * as Path2 from "../assets/paths/path-2.json";
@@ -28,6 +31,8 @@ const assets = new Assets({
     "test-stage.tmx": { type: "stage", data: TestStage },
     "stage1.tmx": { type: "stage", data: Stage1 },
     "stage2.tmx": { type: "stage", data: Stage2 },
+    "stage3.tmx": { type: "stage", data: Stage3 },
+    "stage3a.tmx": { type: "stage", data: Stage3a },
     "tileset.json": { type: "tileset", data: Tileset },
     "spikes.json": { type: "sprite", data: Spikes },
     "fruit.json": { type: "sprite", data: Fruit },
@@ -35,6 +40,7 @@ const assets = new Assets({
     "player.json": { type: "sprite", data: Player },
     "spring.json": { type: "sprite", data: Spring },
     "platform.json": { type: "sprite", data: Platform },
+    "grabbable.json": { type: "sprite", data: Grabbable },
     "path-1.json": { type: "path", data: Path1 },
     "path-2.json": { type: "path", data: Path2 },
   }

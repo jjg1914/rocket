@@ -62,7 +62,7 @@ function _solidForMode(config?: Partial<GrabableConfig>)
   if (config != null) {
     switch (config.mode) {
     case "ladder":
-      return [ null, 1 ];
+      return [ NaN, 1 ];
     default:
       return false;
     }
