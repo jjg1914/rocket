@@ -1,5 +1,3 @@
-import { merge } from "lodash";
-
 import {
   SimpleEntityConfig,
 } from "mu-engine";
@@ -19,9 +17,7 @@ export class OscillatePlatformEntity extends PlatformEntity {
   oscillate: OscillateData;
 
   constructor(config: Partial<OscillatePlatformConfig>) {
-    super(merge({
-      render: { sprite: "platform.json" },
-    }, config));
+    super(config);
 
     this.oscillate = new OscillateComponent(config.oscillate);
 

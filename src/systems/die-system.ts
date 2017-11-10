@@ -43,6 +43,10 @@ export function DieSystem(entity: DieEntity): void {
     }
   });
 
+  entity.on("crush", () => {
+    entity.send("die", new DieEvent());
+  });
+
   entity.before("keydown", () => _die);
   entity.before("keyup", () => _die);
 }
