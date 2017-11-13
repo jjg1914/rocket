@@ -13,6 +13,8 @@ import {
   SimpleEntity,
   LandingSystem,
   RestrictSystem,
+  ResolutionEvent,
+  EntityDestroyEvent,
 } from "mu-engine";
 
 import { GrabData, GrabComponent } from "../components/grab-component";
@@ -20,6 +22,9 @@ import { StatsData, StatsComponent } from "../components/stats-component";
 import { GrabSystem } from "../systems/grab-system";
 import { DoorSystem } from "../systems/door-system";
 import { DieSystem } from "../systems/die-system";
+
+import { LockEntity } from "./lock-entity";
+import { KeyEntity } from "./key-entity";
 
 export interface PlayerConfig extends SimpleEntityConfig {
   animation: Partial<AnimationData>;
@@ -79,6 +84,28 @@ export class PlayerEntity extends SimpleEntity {
 
     this.on("stop-left", () => {
       this.animation.tag = "stand-left";
+    });
+
+    this.on("bump", (ev: ResolutionEvent) => {
+      if (ev.target instanceof LockEntity) {
+        const lock = ev.target;
+
+        if (this.grab.target instanceof KeyEntity) {
+          const key = this.grab.target;
+
+          if (lock.key.value == key.key.value) {
+            if (lock.parent !== undefined) {
+              lock.parent.send("remove", new EntityDestroyEvent("remove", lock));
+            }
+
+            if (key.parent !== undefined) {
+              key.parent.send("remove", new EntityDestroyEvent("remove", key));
+            }
+
+            this.grab.target = null;
+          }
+        }
+      }
     });
 
     DieSystem(this);

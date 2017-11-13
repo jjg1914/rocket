@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="60" height="9" tilewidth="16" tileheight="16" nextobjectid="48">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="60" height="9" tilewidth="16" tileheight="16" nextobjectid="51">
  <properties>
   <property name="player" value="{ &quot;x&quot;: 32, &quot;y&quot;: 112 }"/>
  </properties>
@@ -32,13 +32,13 @@
     <property name="render.fill" type="color" value="#ffff0000"/>
    </properties>
   </object>
-  <object id="10" type="platform" x="72" y="24" width="24" height="8">
+  <object id="10" type="path-platform" x="72" y="24" width="24" height="8">
    <properties>
     <property name="path.path" type="file" value="path-1.json"/>
     <property name="render.fill" type="color" value="#ff0000ff"/>
    </properties>
   </object>
-  <object id="11" type="platform" x="264" y="68" width="24" height="8">
+  <object id="11" type="path-platform" x="264" y="68" width="24" height="8">
    <properties>
     <property name="path.path" type="file" value="path-2.json"/>
     <property name="render.fill" type="color" value="#ff0000ff"/>
@@ -120,5 +120,15 @@
     <property name="render.fill" type="color" value="#ff000000"/>
    </properties>
   </object>
+  <object id="48" type="oscillate-platform" x="160" y="112" width="16" height="16">
+   <properties>
+    <property name="collision.solid" type="bool" value="true"/>
+    <property name="oscillate.yAmplitude" type="int" value="-64"/>
+    <property name="oscillate.yFrequency" type="int" value="3000"/>
+    <property name="render.fill" type="color" value="#ff0000ff"/>
+   </properties>
+  </object>
+  <object id="49" type="key" x="272" y="112" width="16" height="16"/>
+  <object id="50" type="lock" x="432" y="64" width="16" height="32"/>
  </objectgroup>
 </map>

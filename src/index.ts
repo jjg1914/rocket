@@ -21,6 +21,8 @@ import * as Player from "../assets/sprites/player.json";
 import * as Spring from "../assets/sprites/spring.json";
 import * as Platform from "../assets/sprites/platform.json";
 import * as Grabbable from "../assets/sprites/grabbable.json";
+import * as Keys from "../assets/sprites/keys.json";
+import * as Locks from "../assets/sprites/locks.json";
 
 import * as Path1 from "../assets/paths/path-1.json";
 import * as Path2 from "../assets/paths/path-2.json";
@@ -41,6 +43,8 @@ const assets = new Assets({
     "spring.json": { type: "sprite", data: Spring },
     "platform.json": { type: "sprite", data: Platform },
     "grabbable.json": { type: "sprite", data: Grabbable },
+    "keys.json": { type: "sprite", data: Keys },
+    "locks.json": { type: "sprite", data: Locks },
     "path-1.json": { type: "path", data: Path1 },
     "path-2.json": { type: "path", data: Path2 },
   }
@@ -57,6 +61,8 @@ import { SpikesEntity } from "./entities/spikes-entity";
 import { FruitEntity } from "./entities/fruit-entity";
 import { SpringEntity } from "./entities/spring-entity";
 import { DoorEntity } from "./entities/door-entity";
+import { KeyEntity } from "./entities/key-entity";
+import { LockEntity } from "./entities/lock-entity";
 
 import { StageMenuEntity } from "./entities/stage-menu-entity";
 
@@ -80,6 +86,8 @@ document.addEventListener("DOMContentLoaded", () => {
         fruit: FruitEntity,
         spring: SpringEntity,
         door: DoorEntity,
+        key: KeyEntity,
+        lock: LockEntity,
       },
     }));
 
