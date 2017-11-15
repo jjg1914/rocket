@@ -1,11 +1,11 @@
 { "columns":20,
  "image":"tileset.png",
- "imageheight":160,
+ "imageheight":320,
  "imagewidth":320,
  "margin":0,
  "name":"tileset",
  "spacing":0,
- "tilecount":200,
+ "tilecount":400,
  "tileheight":16,
  "tilewidth":16,
  "type":"tileset"

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="12" height="36" tilewidth="16" tileheight="16" nextobjectid="45">
+ <properties>
+  <property name="player" value="{ &quot;x&quot;: 112, &quot;y&quot;: 546 }"/>
+ </properties>
+ <tileset firstgid="1" source="../tileset.json"/>
+ <layer name="Background" width="12" height="36">
+  <data encoding="csv">
+182,213,214,217,214,214,214,214,214,214,215,182,
+182,233,214,214,214,214,214,214,214,214,215,182,
+182,253,214,214,217,214,214,214,217,214,218,182,
+182,213,214,214,214,214,214,214,214,214,215,182,
+182,213,217,214,214,214,214,214,214,214,215,182,
+182,213,214,214,214,214,214,217,214,214,218,182,
+182,216,214,214,214,214,214,214,214,214,215,182,
+182,213,214,214,214,214,217,214,214,214,218,182,
+182,213,214,217,214,214,214,214,214,217,215,182,
+182,216,214,214,214,214,214,214,214,214,215,182,
+182,213,214,214,217,214,214,214,214,214,215,182,
+182,233,214,214,214,214,214,217,214,214,218,182,
+182,253,217,214,214,214,214,214,214,214,235,182,
+182,213,214,214,214,214,214,214,214,214,255,182,
+182,216,214,214,214,217,214,214,214,214,215,182,
+182,213,214,214,214,214,214,214,214,217,215,182,
+182,216,214,217,214,214,214,214,214,214,215,182,
+182,213,214,214,214,214,217,214,214,214,218,182,
+182,213,214,214,214,214,214,214,214,214,215,182,
+182,233,214,217,214,214,214,214,217,214,235,182,
+182,253,214,214,214,214,214,214,214,214,255,182,
+182,213,214,217,214,214,214,214,214,214,215,182,
+182,216,214,214,217,214,214,214,214,214,215,182,
+182,213,214,214,214,214,214,214,217,214,215,182,
+182,213,214,214,214,214,217,214,214,214,218,182,
+182,216,214,214,217,214,214,214,214,214,215,182,
+182,213,214,214,214,214,214,214,214,217,215,182,
+182,216,214,214,214,214,214,214,214,214,235,182,
+182,233,214,217,214,214,214,214,214,214,255,182,
+182,253,214,214,214,214,217,214,214,214,215,182,
+182,213,214,214,214,214,214,214,217,214,218,182,
+182,216,214,214,214,217,214,214,214,214,215,182,
+182,213,214,214,214,214,217,214,214,214,215,182,
+182,213,214,217,214,214,214,234,214,214,218,182,
+182,216,214,214,214,214,214,254,214,217,215,182,
+182,213,214,214,214,214,214,214,214,214,215,182
+</data>
+ </layer>
+ <layer name="Tile Layer 2" width="12" height="36">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,235,0,
+0,0,0,0,0,0,0,0,0,0,255,0,
+0,22,22,22,22,22,22,22,22,22,22,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,22,22,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,22,22,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,22,22,0,0,0,0,0,0,22,22,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,22,22,0,
+0,22,22,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,22,22,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+2,2,2,2,2,2,2,2,2,2,2,2
+</data>
+ </layer>
+ <objectgroup name="Object Layer 1">
+  <object id="1" type="floor" x="0" y="560" width="192" height="16"/>
+  <object id="2" type="floor" x="176" y="0" width="16" height="560"/>
+  <object id="3" type="floor" x="0" y="0" width="16" height="560"/>
+  <object id="4" type="platform" x="16" y="336" width="32" height="8"/>
+  <object id="5" type="platform" x="16" y="480" width="32" height="8"/>
+  <object id="6" type="platform" x="80" y="496" width="32" height="8"/>
+  <object id="7" type="platform" x="144" y="464" width="32" height="8"/>
+  <object id="11" type="door" x="112" y="528" width="16" height="32">
+   <properties>
+    <property name="door.stage" value="stage3.tmx"/>
+    <property name="door.x" type="int" value="320"/>
+    <property name="door.y" type="int" value="546"/>
+   </properties>
+  </object>
+  <object id="12" type="door" x="168" y="432" width="8" height="32">
+   <properties>
+    <property name="door.stage" value="stage3.tmx"/>
+    <property name="door.x" type="int" value="360"/>
+    <property name="door.y" type="int" value="450"/>
+   </properties>
+  </object>
+  <object id="13" type="door" x="16" y="448" width="8" height="32">
+   <properties>
+    <property name="door.stage" value="stage3.tmx"/>
+    <property name="door.x" type="int" value="266"/>
+    <property name="door.y" type="int" value="466"/>
+   </properties>
+  </object>
+  <object id="16" type="door" x="16" y="304" width="8" height="32">
+   <properties>
+    <property name="door.stage" value="stage3.tmx"/>
+    <property name="door.x" type="int" value="266"/>
+    <property name="door.y" type="int" value="322"/>
+   </properties>
+  </object>
+  <object id="17" type="platform" x="144" y="336" width="32" height="8"/>
+  <object id="18" type="platform" x="144" y="224" width="32" height="8"/>
+  <object id="19" type="platform" x="16" y="208" width="32" height="8"/>
+  <object id="20" type="platform" x="16" y="48" width="160" height="8"/>
+  <object id="21" type="grab" x="96" y="352" width="12" height="12">
+   <properties>
+    <property name="animation.tag" value="default"/>
+    <property name="grabable.mode" value="fixed"/>
+    <property name="render.sprite" value="grabbable.json"/>
+   </properties>
+  </object>
+  <object id="23" type="door" x="168" y="304" width="8" height="32">
+   <properties>
+    <property name="door.stage" value="stage3.tmx"/>
+    <property name="door.x" type="int" value="360"/>
+    <property name="door.y" type="int" value="322"/>
+   </properties>
+  </object>
+  <object id="24" type="door" x="168" y="192" width="8" height="32">
+   <properties>
+    <property name="door.stage" value="stage3.tmx"/>
+    <property name="door.x" type="int" value="360"/>
+    <property name="door.y" type="int" value="210"/>
+   </properties>
+  </object>
+  <object id="25" type="door" x="16" y="176" width="8" height="32">
+   <properties>
+    <property name="door.stage" value="stage3.tmx"/>
+    <property name="door.x" type="int" value="266"/>
+    <property name="door.y" type="int" value="194"/>
+   </properties>
+  </object>
+  <object id="26" type="door" x="16" y="16" width="8" height="32">
+   <properties>
+    <property name="door.stage" value="stage3.tmx"/>
+    <property name="door.x" type="int" value="266"/>
+    <property name="door.y" type="int" value="34"/>
+   </properties>
+  </object>
+  <object id="27" type="grab" x="128" y="176" width="12" height="12">
+   <properties>
+    <property name="animation.tag" value="default"/>
+    <property name="grabable.mode" value="fixed"/>
+    <property name="render.sprite" value="grabbable.json"/>
+   </properties>
+  </object>
+  <object id="28" type="grab" x="80" y="160" width="12" height="12">
+   <properties>
+    <property name="animation.tag" value="default"/>
+    <property name="grabable.mode" value="fixed"/>
+    <property name="render.sprite" value="grabbable.json"/>
+   </properties>
+  </object>
+  <object id="29" type="fruit" x="80" y="432" width="16" height="16"/>
+  <object id="30" type="fruit" x="96" y="432" width="16" height="16"/>
+  <object id="31" type="fruit" x="96" y="304" width="16" height="16"/>
+  <object id="32" type="fruit" x="96" y="288" width="16" height="16"/>
+  <object id="33" type="fruit" x="128" y="128" width="16" height="16"/>
+  <object id="34" type="fruit" x="80" y="112" width="16" height="16"/>
+  <object id="35" type="fruit" x="32" y="32" width="16" height="16"/>
+  <object id="36" type="fruit" x="48" y="32" width="16" height="16"/>
+  <object id="37" type="fruit" x="64" y="32" width="16" height="16"/>
+  <object id="38" type="fruit" x="80" y="32" width="16" height="16"/>
+  <object id="39" type="fruit" x="96" y="32" width="16" height="16"/>
+  <object id="40" type="fruit" x="112" y="32" width="16" height="16"/>
+  <object id="41" type="fruit" x="128" y="32" width="16" height="16"/>
+  <object id="42" type="fruit" x="144" y="32" width="16" height="16"/>
+  <object id="44" type="door" x="168" y="16" width="8" height="32">
+   <properties>
+    <property name="door.stage" value="stage3.tmx"/>
+    <property name="door.x" type="int" value="360"/>
+    <property name="door.y" type="int" value="34"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
