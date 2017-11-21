@@ -18,8 +18,10 @@ import {
 } from "mu-engine";
 
 import { GrabData, GrabComponent } from "../components/grab-component";
+import { TargetData, TargetComponent } from "../components/target-component";
 import { StatsData, StatsComponent } from "../components/stats-component";
 import { GrabSystem } from "../systems/grab-system";
+import { TargetSystem } from "../systems/target-system";
 import { DoorSystem } from "../systems/door-system";
 import { DieSystem } from "../systems/die-system";
 
@@ -37,6 +39,7 @@ export class PlayerEntity extends SimpleEntity {
   grab: GrabData;
   stats: StatsData;
   control: ControlData;
+  target: TargetData;
 
   constructor(config: Partial<PlayerConfig>) {
     super(merge({
@@ -68,6 +71,10 @@ export class PlayerEntity extends SimpleEntity {
       xAccel: 192,
       jumpSpeed: 224,
       jumpCutoff: 100,
+    });
+
+    this.target = new TargetComponent({
+      tag: "player",
     });
 
     this.on("start-right", () => {
@@ -119,5 +126,7 @@ export class PlayerEntity extends SimpleEntity {
     GrabSystem(this);
     DoorSystem(this);
     Control2WaySystem(this);
+
+    TargetSystem(this);
   }
 }

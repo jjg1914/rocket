@@ -1,0 +1,34 @@
+{ "frames": {
+   "bomb 0.ase": {
+    "frame": { "x": 0, "y": 0, "w": 12, "h": 12 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 12, "h": 12 },
+    "sourceSize": { "w": 12, "h": 12 },
+    "duration": 100
+   },
+   "bomb 1.ase": {
+    "frame": { "x": 12, "y": 0, "w": 12, "h": 12 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 12, "h": 12 },
+    "sourceSize": { "w": 12, "h": 12 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.2.2",
+  "image": "/Users/jjg1914/Programs/rocket/assets/sprites/bomb.png",
+  "format": "RGBA8888",
+  "size": { "w": 24, "h": 12 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Layer 1", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

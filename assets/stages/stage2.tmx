@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="160" height="27" tilewidth="16" tileheight="16" nextobjectid="282">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="160" height="27" tilewidth="16" tileheight="16" nextobjectid="287">
  <properties>
   <property name="player" value="{ &quot;x&quot;: 32, &quot;y&quot;: 402 }"/>
  </properties>
@@ -284,5 +284,6 @@
     <property name="grabable.mode" value="ladder"/>
    </properties>
   </object>
+  <object id="286" type="bomb-drone" x="96" y="368" width="16" height="16"/>
  </objectgroup>
 </map>

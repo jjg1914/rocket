@@ -8,6 +8,7 @@ import {
 } from "mu-engine";
 
 import { GrabEntity, GrabEvent } from "../events/grab-event";
+import { GrabbedEvent } from "../events/grabbed-event";
 
 export function GrabSystem(entity: GrabEntity): void {
   const _collisions: CollisionEntity[] = [];
@@ -183,6 +184,10 @@ export function GrabSystem(entity: GrabEntity): void {
         if (e.send("grab", new GrabEvent(entity))) {
           break;
         }
+      }
+
+      if (entity.grab.target != null) {
+        entity.grab.target.send("grabbed", new GrabbedEvent(entity));
       }
     }
 

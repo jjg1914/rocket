@@ -23,6 +23,10 @@ import * as Platform from "../assets/sprites/platform.json";
 import * as Grabbable from "../assets/sprites/grabbable.json";
 import * as Keys from "../assets/sprites/keys.json";
 import * as Locks from "../assets/sprites/locks.json";
+import * as MortarDrone from "../assets/sprites/mortar-drone.json";
+import * as Mortar from "../assets/sprites/mortar.json";
+import * as BombDrone from "../assets/sprites/bomb-drone.json";
+import * as Bomb from "../assets/sprites/bomb.json";
 
 import * as Path1 from "../assets/paths/path-1.json";
 import * as Path2 from "../assets/paths/path-2.json";
@@ -45,6 +49,10 @@ const assets = new Assets({
     "grabbable.json": { type: "sprite", data: Grabbable },
     "keys.json": { type: "sprite", data: Keys },
     "locks.json": { type: "sprite", data: Locks },
+    "mortar-drone.json": { type: "sprite", data: MortarDrone },
+    "mortar.json": { type: "sprite", data: Mortar },
+    "bomb-drone.json": { type: "sprite", data: BombDrone },
+    "bomb.json": { type: "sprite", data: Bomb },
     "path-1.json": { type: "path", data: Path1 },
     "path-2.json": { type: "path", data: Path2 },
   }
@@ -63,6 +71,8 @@ import { SpringEntity } from "./entities/spring-entity";
 import { DoorEntity } from "./entities/door-entity";
 import { KeyEntity } from "./entities/key-entity";
 import { LockEntity } from "./entities/lock-entity";
+import { MortarDroneEntity } from "./entities/mortar-drone-entity";
+import { BombDroneEntity } from "./entities/bomb-drone-entity";
 
 import { StageMenuEntity } from "./entities/stage-menu-entity";
 
@@ -88,6 +98,8 @@ document.addEventListener("DOMContentLoaded", () => {
         door: DoorEntity,
         key: KeyEntity,
         lock: LockEntity,
+        "mortar-drone": MortarDroneEntity,
+        "bomb-drone": BombDroneEntity,
       },
     }));
 
