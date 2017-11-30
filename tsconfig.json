@@ -18,7 +18,6 @@
     "allowSyntheticDefaultImports": true,
     "sourceRoot": "./",
     "inlineSourceMap": true,
-    "inlineSources": true,
-    "experimentalDecorators": true
+    "inlineSources": true
   }
 }

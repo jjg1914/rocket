@@ -69,7 +69,7 @@ export class BombDroneEntity extends GrabEntity {
                     { leaf: chaseBehavior },
                   ],
                 },
-                { idle: null },
+                { idle: undefined },
               ],
             },
           },
