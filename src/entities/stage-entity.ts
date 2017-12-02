@@ -78,7 +78,6 @@ export class StageEntity extends BaseStageEntity {
     if (this._stages[stage] === undefined) {
       const tmp = new StageEntity({
         assets: this._config.assets,
-        entities: this._config.entities,
         stage: stage,
       });
 

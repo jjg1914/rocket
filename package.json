@@ -33,6 +33,7 @@
   "dependencies": {
     "@types/lodash": "^4.14.78",
     "lodash": "^4.17.4",
+    "mu-assets-loader": "^0.1.0",
     "mu-engine": "^0.7.0"
   }
 }
