@@ -11,10 +11,7 @@ module.exports = {
     filename: "[name].js",
   },
   resolve: {
-    extensions: [ '.js', '.ts', ".json", '.scss', '.tmx' ],
-  },
-  resolveLoader: {
-    modules: [ "node_modules", "src/util" ],
+    extensions: [ ".js", ".ts", ".scss" ],
   },
   module: {
     loaders: [
@@ -27,14 +24,18 @@ module.exports = {
         loader: "babel-loader",
         include: [ __dirname + "/src" ],
         query: {
-          presets: [ 'es2015' ],
+          presets: [ "env" ],
         }
       },
       {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract({
           fallback: "style-loader",
-          use: "css-loader!autoprefixer-loader!sass-loader",
+          use: [
+            { loader: "css-loader", options: { importLoaders: 1 } },
+            "postcss-loader",
+            "sass-loader",
+          ],
         }),
       },
     ],
