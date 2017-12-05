@@ -8,6 +8,8 @@ import {
   ControlData,
   ControlComponent,
   buildBehavior,
+  EntityAddEvent,
+  EntityDestroyEvent,
 } from "mu-engine";
 
 // import { MortarEntity } from "./mortar-entity";
@@ -17,6 +19,8 @@ import { TargetBehavior } from "../behaviors/target-behavior";
 import { BombBehavior } from "../behaviors/bomb-behavior";
 import { ChaseBehavior } from "../behaviors/chase-behavior";
 import { GrabbedBehavior } from "../behaviors/grabbed-behavior";
+
+import { ExplosionEntity } from "./explosion-entity";
 
 export interface BombDroneConfig extends GrabConfig {
   ai: BehaviorData;
@@ -40,41 +44,44 @@ export class BombDroneEntity extends GrabEntity {
         xMax: 92,
         yMax: 64,
       },
+      collision: {
+        ignoreSolid: true,
+      }
     }, config, {
       position: { width: 16, height: 16 },
     }));
 
-    const grabbedBehavior = new GrabbedBehavior(this);
     const targetBehavior = new TargetBehavior(this, {
       range: 128,
-      yOffset: -64,
+      yOffset: -48,
     });
     const bombBehavior = new BombBehavior(this, targetBehavior);
     const chaseBehavior = new ChaseBehavior(this, targetBehavior, {
-      range: 16,
-      yOffset: -64,
+      range: 8,
+      yOffset: -48,
+      xOffset: 24,
+      xFlip: true,
     });
 
     this.ai = new BehaviorComponent({
-      behavior: buildBehavior({
-        parallel: [
-          { leaf: grabbedBehavior },
-          {
-            repeat: {
-              select: [
+      behavior: new GrabbedBehavior(this, buildBehavior({
+        repeat: {
+          select: [
+            {
+              sequence: [
+                { leaf: targetBehavior },
                 {
-                  sequence: [
-                    { leaf: targetBehavior },
-                    { leaf: bombBehavior },
+                  parallel: [
+                    { phase: { leaf: bombBehavior }, params: { period: 1500 } },
                     { leaf: chaseBehavior },
                   ],
                 },
-                { idle: undefined },
               ],
             },
-          },
-        ],
-      }),
+            { idle: undefined },
+          ],
+        },
+      })),
     });
 
     this.control = new ControlComponent({
@@ -83,5 +90,18 @@ export class BombDroneEntity extends GrabEntity {
     });
 
     BehaviorSystem(this);
+
+    this.on("ungrab", () => {
+      this.collision.ignoreSolid = false;
+    });
+
+    this.on("bump", () => {
+      if (this.parent !== undefined) {
+        const ex = ExplosionEntity.explosion2(this.position.x,
+                                              this.position.y + 4);
+        this.parent.send("put", new EntityAddEvent("put", ex));
+        this.parent.send("remove", new EntityDestroyEvent("remove", this));
+      }
+    });
   }
 }

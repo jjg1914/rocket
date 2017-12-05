@@ -26,7 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
       height: 144,
       smoothing: false,
       scale: 2,
-      background: "#FFFFFF",
     });
   }
 });

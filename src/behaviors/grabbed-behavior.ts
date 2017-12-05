@@ -6,16 +6,25 @@ import {
 } from "mu-engine";
 
 export class GrabbedBehavior implements Behavior {
-  _grabbed: boolean;
+  private _grabbed: boolean;
+  private _child: Behavior;
 
-  constructor(entity: CollisionEntity) {
+  constructor(entity: CollisionEntity, child: Behavior) {
     this._grabbed = false;
+    this._child = child;
 
     entity.on("grabbed", () => {
       this._grabbed = true;
 
       if (entity.accel !== undefined) {
         entity.accel.restrict = false;
+        entity.accel.xAccel = 0;
+        entity.accel.yAccel = 0;
+      }
+
+      if (entity.movement !== undefined) {
+        entity.movement.xSpeed = 0;
+        entity.movement.ySpeed = 0;
       }
     });
   }
@@ -24,11 +33,11 @@ export class GrabbedBehavior implements Behavior {
     this._grabbed = false;
   }
 
-  call(_options: BehaviorOptions): BehaviorState {
+  call(options: BehaviorOptions): BehaviorState {
     if (this._grabbed) {
       return "success";
     } else {
-      return "pending";
+      return this._child.call(options);
     }
   }
 }

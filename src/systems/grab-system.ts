@@ -23,6 +23,8 @@ export function GrabSystem(entity: GrabEntity): void {
       if (entity.grab.target == null) {
         _grab = event;
       } else {
+        entity.grab.target.send("ungrab", new GrabEvent("ungrab", entity));
+
         switch (entity.grab.mode) {
         case "pickup":
           entity.grab.target.collision.ignoreSolid = false;
@@ -69,6 +71,7 @@ export function GrabSystem(entity: GrabEntity): void {
           return true;
         }
       }
+
       break;
     case " ":
       if (entity.grab.target != null) {
@@ -181,7 +184,7 @@ export function GrabSystem(entity: GrabEntity): void {
 
     if (!f() && _grab) {
       for (let e of _collisions) {
-        if (e.send("grab", new GrabEvent(entity))) {
+        if (e.send("grab", new GrabEvent("grab", entity))) {
           break;
         }
       }

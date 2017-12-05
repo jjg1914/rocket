@@ -8,7 +8,7 @@ import {
 } from "mu-engine";
 import { GrabData } from "../components/grab-component";
 
-export type GrabEventType = "grab";
+export type GrabEventType = "grab" | "ungrab";
 
 export interface GrabEntity extends Entity {
   position: PositionData;
@@ -28,8 +28,8 @@ export class GrabEvent implements GrabEventData {
   type: GrabEventType;
   target: GrabEntity;
 
-  constructor(target: GrabEntity) {
-    this.type = "grab";
+  constructor(type: GrabEventType, target: GrabEntity) {
+    this.type = type;
     this.target = target;
   }
 }
